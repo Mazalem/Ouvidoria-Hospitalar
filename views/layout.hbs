@@ -1,10 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-custom mb-4">
+    <div class="container">
+      <span class="navbar-brand mb-0 h1">
+        <i class="bi bi-clipboard-check"></i>
+        Avaliação HDS / PAM
+      </span>
+    </div>
+  </nav>
+
+  <div class="container main-container">
     {{{body}}}
-  </body>
+  </div>
+
+  <footer class="footer">
+    <div class="container">© 2025 — Sistema de Avaliação HDS/PAM</div>
+  </footer>
+
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+
 </html>
