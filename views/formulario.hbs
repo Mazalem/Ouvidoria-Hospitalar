@@ -1,0 +1,305 @@
+<form action="/salvar-pesquisa" method="POST">
+
+    <!-- BLOCO 1: UNIDADE E LOCALIZAÇÃO -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">1. Dados da Unidade e Localização</h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Qual unidade você vai avaliar?</label>
+                <select class="form-select" name="unidade" required>
+                    <option value="" selected disabled>Selecione...</option>
+                    <option value="HOSPITAL">Hospital (HDS)</option>
+                    <option value="PAM">Pronto Atendimento Municipal (PAM)</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Em qual cidade você mora?</label>
+                    <select class="form-select" name="cidade" id="cidade" onchange="toggleLocal()">
+                        <option value="Divino">Divino</option>
+                        <option value="Outra">Outra Cidade / Limítrofe</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="divino-options">
+                <div class="mb-3">
+                    <label class="form-label">Zona Rural ou Urbana?</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="zona" id="urbana" value="Urbana" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="urbana">Cidade (Urbana)</label>
+
+                        <input type="radio" class="btn-check" name="zona" id="rural" value="Rural" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="rural">Zona Rural</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Se mora na cidade, qual o bairro?</label>
+                        <select class="form-select" name="bairro">
+                            <option value="">Não se aplica</option>
+                            {{#each bairrosDivino}}
+                            <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Se mora na Zona Rural, qual comunidade?</label>
+                        <select class="form-select" name="comunidade">
+                            <option value="">Não se aplica</option>
+                            {{#each zonasRurais}}
+                            <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOCO 2: PSF -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">2. Sobre o PSF</h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Antes de vir ao PAM, você procurou seu PSF?</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_sim" value="Sim">
+                        <label class="form-check-label" for="psf_sim">Sim</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_nao" value="Nao">
+                        <label class="form-check-label" for="psf_nao">Não</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Qual é o seu PSF de referência?</label>
+                <input type="text" class="form-control" name="nome_psf">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Se não foi ao PSF, qual o principal motivo?</label>
+                <textarea class="form-control" name="motivo_nao_psf" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOCO 3: PERFIL DO USUÁRIO -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">3. Perfil do Entrevistado</h5>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Você é:</label>
+                    <select class="form-select" name="perfil_usuario">
+                        <option value="Paciente">Paciente</option>
+                        <option value="Acompanhante">Acompanhante</option>
+                        <option value="Visitante">Visitante</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Idade:</label>
+                    <input type="number" class="form-control" name="idade" min="0">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Sexo:</label>
+                    <select class="form-select" name="sexo">
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Escolaridade:</label>
+                    <select class="form-select" name="escolaridade">
+                        <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                        <option value="Fundamental Completo">Fundamental Completo</option>
+                        <option value="Medio Completo">Médio Completo</option>
+                        <option value="Superior">Superior</option>
+                        <option value="Nao Alfabetizado">Não sabe ler/escrever</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOCO 4: AVALIAÇÃO DE SATISFAÇÃO (Escala de Likert) -->
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">4. Avaliação do Atendimento</h5>
+            <p class="text-muted small">Avalie os itens abaixo:</p>
+
+            <!-- Pergunta 3B -->
+            <div class="mb-4 bg-light p-3 rounded">
+                <label class="fw-bold d-block mb-2">Tempo de espera para ser atendido:</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_mb" value="Muito Bom">
+                    <label class="btn btn-outline-success btn-sm" for="tempo_mb">Muito Bom</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_b" value="Bom">
+                    <label class="btn btn-outline-primary btn-sm" for="tempo_b">Bom</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_r" value="Regular">
+                    <label class="btn btn-outline-warning btn-sm" for="tempo_r">Regular</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_ruim" value="Ruim">
+                    <label class="btn btn-outline-danger btn-sm" for="tempo_ruim">Ruim</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_mruim" value="Muito Ruim">
+                    <label class="btn btn-outline-dark btn-sm" for="tempo_mruim">Muito Ruim</label>
+                </div>
+            </div>
+
+            <!-- Pergunta 4 -->
+            <div class="mb-4 bg-light p-3 rounded">
+                <label class="fw-bold d-block mb-2">Limpeza dos ambientes:</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_mb" value="Muito Bom">
+                    <label class="btn btn-outline-success btn-sm" for="limp_mb">Muito Bom</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_b" value="Bom">
+                    <label class="btn btn-outline-primary btn-sm" for="limp_b">Bom</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_r" value="Regular">
+                    <label class="btn btn-outline-warning btn-sm" for="limp_r">Regular</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_ruim" value="Ruim">
+                    <label class="btn btn-outline-danger btn-sm" for="limp_ruim">Ruim</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_mruim" value="Muito Ruim">
+                    <label class="btn btn-outline-dark btn-sm" for="tempo_mruim">Muito Ruim</label>
+                </div>
+            </div>
+
+            <!-- Pergunta 7 -->
+            <div class="mb-4 bg-light p-3 rounded">
+                <label class="fw-bold d-block mb-2">Atendimento da equipe de saúde (Médicos/Enfermeiros):</label>
+                <div class="d-flex flex-wrap gap-2">
+                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_mb" value="Muito Bom">
+                    <label class="btn btn-outline-success btn-sm" for="equipe_mb">Muito Bom</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_b" value="Bom">
+                    <label class="btn btn-outline-primary btn-sm" for="equipe_b">Bom</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_r" value="Regular">
+                    <label class="btn btn-outline-warning btn-sm" for="equipe_r">Regular</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_ruim" value="Ruim">
+                    <label class="btn btn-outline-danger btn-sm" for="equipe_ruim">Ruim</label>
+
+                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_mruim" value="Muito Ruim">
+                    <label class="btn btn-outline-dark btn-sm" for="tempo_mruim">Muito Ruim</label>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label fw-bold">O(a) senhor(a) sentiu segurança/confiança na equipe?</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="seguranca" id="seg_sim" value="Sim">
+                        <label class="form-check-label" for="seg_sim">Sim</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="seguranca" id="seg_nao" value="Nao">
+                        <label class="form-check-label" for="seg_nao">Não</label>
+                    </div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-bold">Como o(a) senhor(a) avalia as informações e esclarecimentos que você
+                    teve sobre o seu
+                    estado de saúde no estabelecimento? UNIDADE:PAM E HOSPITAL</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="seguranca" id="seg_sim" value="Sim">
+                        <label class="form-check-label" for="seg_sim">Sim</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="seguranca" id="seg_nao" value="Nao">
+                        <label class="form-check-label" for="seg_nao">Não</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <!-- BLOCO NPS (Net Promoter Score) -->
+    <div class="card border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Avaliação Geral (NPS)</h5>
+        </div>
+        <div class="card-body text-center">
+            <p class="lead">Qual a chance de você indicar os serviços do PAM/Hospital para um amigo ou familiar?</p>
+            <p class="small text-muted">0 = Nada provável | 10 = Extremamente provável</p>
+
+            <div class="btn-group w-100 d-flex flex-wrap" role="group">
+                <!-- Loop manual de 0 a 10 -->
+                <input type="radio" class="btn-check" name="nps" id="nps0" value="0">
+                <label class="btn btn-outline-danger" for="nps0">0</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps1" value="1">
+                <label class="btn btn-outline-danger" for="nps1">1</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps2" value="2">
+                <label class="btn btn-outline-danger" for="nps2">2</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps3" value="3">
+                <label class="btn btn-outline-warning" for="nps3">3</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps4" value="4">
+                <label class="btn btn-outline-warning" for="nps4">4</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps5" value="5">
+                <label class="btn btn-outline-warning" for="nps5">5</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps6" value="6">
+                <label class="btn btn-outline-info" for="nps6">6</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps7" value="7">
+                <label class="btn btn-outline-info" for="nps7">7</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps8" value="8">
+                <label class="btn btn-outline-primary" for="nps8">8</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps9" value="9">
+                <label class="btn btn-outline-success" for="nps9">9</label>
+
+                <input type="radio" class="btn-check" name="nps" id="nps10" value="10">
+                <label class="btn btn-outline-success" for="nps10">10</label>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+
+    <!-- COMENTÁRIOS E CONTATO -->
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <label class="form-label">Comentário Livre (Opcional):</label>
+                <textarea class="form-control" name="comentario" rows="3"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    
+    <div class="d-grid gap-2 mb-5">
+        <button type="submit" class="btn btn-success btn-lg">Enviar Avaliação</button>
+    </div>
+</form>

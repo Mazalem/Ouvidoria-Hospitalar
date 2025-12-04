@@ -1,2 +1,49 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-4">
+            <div class="card-body">
+                <h3 class="card-title text-center mb-4">Termo de Livre Esclarecido</h3>
+                <p class="lead">
+                    Antes de continuar, pedimos seu consentimento para participar desta pesquisa de satisfação.
+                </p>
+                <p>
+                    Suas respostas serão utilizadas <strong>exclusivamente para melhorar a qualidade do
+                        atendimento</strong>
+                    no Hospital Divinense Service (HDS) e/ou no Pronto Atendimento Municipal (PAM).
+                </p>
+                <p>
+                    A participação é <strong>voluntária, anônima</strong> e você pode parar a qualquer momento.
+                </p>
+
+                <hr class="my-4">
+
+                <form action="/formulario" method="GET">
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="radio" name="termo" id="concordo" value="sim" required>
+                        <label class="form-check-label fw-bold text-success" for="concordo">
+                            Li e CONCORDO em participar da pesquisa
+                        </label>
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="radio" name="termo" id="nao_concordo" value="nao">
+                        <label class="form-check-label text-danger" for="nao_concordo">
+                            Não concordo - não desejo participar
+                        </label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg" id="btn-iniciar">
+                            Iniciar Pesquisa <i class="bi bi-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-3 text-center">
+                    <small><a href="#" data-bs-toggle="modal" data-bs-target="#modalTermoCompleto">Ler Termo
+                            Completo</a></small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
