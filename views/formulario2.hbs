@@ -1,0 +1,36 @@
+<form action="/formulario/inserir" method="POST">
+    <input type="hidden" name="parte" value="3">
+    <input type="hidden" name="idFormulario" value="{{idFormulario}}">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">2. Sobre o PSF</h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Antes de vir ao PAM, você procurou seu PSF?</label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_sim" value="Sim">
+                        <label class="form-check-label" for="psf_sim">Sim</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_nao" value="Nao">
+                        <label class="form-check-label" for="psf_nao">Não</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Qual é o seu PSF de referência?</label>
+                <input type="text" class="form-control" name="nome_psf">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Se não foi ao PSF, qual o principal motivo?</label>
+                <textarea class="form-control" name="motivo_nao_psf" rows="2"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mb-5 mt-3">
+        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    </div>
+</form>

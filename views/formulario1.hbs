@@ -1,0 +1,65 @@
+<form action="/formulario/inserir" method="POST">
+    <input type="hidden" name="parte" value="2">
+    <input type="hidden" name="idFormulario" value="{{idFormulario}}">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">1. Dados da Unidade e Localização</h5>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Qual unidade você vai avaliar?</label>
+                <select class="form-select" name="unidade" required>
+                    <option value="" selected disabled>Selecione...</option>
+                    <option value="HOSPITAL">Hospital (HDS)</option>
+                    <option value="PAM">Pronto Atendimento Municipal (PAM)</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Em qual cidade você mora?</label>
+                    <select class="form-select" name="cidade" id="cidade" onchange="toggleLocal()">
+                        <option value="Divino">Divino</option>
+                        <option value="Outra">Outra Cidade / Limítrofe</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="divino-options">
+                <div class="mb-3">
+                    <label class="form-label">Zona Rural ou Urbana?</label>
+                    <div class="btn-group w-100" role="group">
+                        <input type="radio" class="btn-check" name="zona" id="urbana" value="Urbana" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="urbana">Cidade (Urbana)</label>
+
+                        <input type="radio" class="btn-check" name="zona" id="rural" value="Rural" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="rural">Zona Rural</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Se mora na cidade, qual o bairro?</label>
+                        <select class="form-select" name="bairro">
+                            <option value="">Não se aplica</option>
+                            {{#each bairrosDivino}}
+                            <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">Se mora na Zona Rural, qual comunidade?</label>
+                        <select class="form-select" name="comunidade">
+                            <option value="">Não se aplica</option>
+                            {{#each zonasRurais}}
+                            <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mb-5 mt-3">
+        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    </div>
+</form>

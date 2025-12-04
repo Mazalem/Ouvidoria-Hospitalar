@@ -28,7 +28,17 @@ class FormularioMongo {
     async inserir(formulario) {
         await conexao_bd();
         const collection = bd().collection("formulario");
-        await collection.insertOne(formulario);
+        const resultado = await collection.insertOne(formulario);
+        return resultado.insertedId.toString();
+    }
+
+    async acrescentar(idFormulario, formulario) {
+        await conexao_bd();
+        const collection = bd().collection("formulario");
+        await collection.findOneAndUpdate(
+            { _id: new mongodb.ObjectId(idFormulario) },
+            { $set: formulario }
+        );
     }
 
 }

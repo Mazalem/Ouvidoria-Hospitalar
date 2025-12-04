@@ -6,5 +6,6 @@ router.get('/', IndexController.index);
 router.get('/login', IndexController.login);
 router.get('/registro', IndexController.registro);
 router.get('/dashboard', IndexController.dashboard);
+router.get('/agradecimento', IndexController.agradecimento);
 
 module.exports = router;

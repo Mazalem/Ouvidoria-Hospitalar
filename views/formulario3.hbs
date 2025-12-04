@@ -1,0 +1,47 @@
+<form action="/formulario/inserir" method="POST">
+    <input type="hidden" name="parte" value="4">
+    <input type="hidden" name="idFormulario" value="{{idFormulario}}">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">3. Perfil do Entrevistado</h5>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Você é:</label>
+                    <select class="form-select" name="perfil_usuario">
+                        <option value="Paciente">Paciente</option>
+                        <option value="Acompanhante">Acompanhante</option>
+                        <option value="Visitante">Visitante</option>
+                    </select>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Idade:</label>
+                    <input type="number" class="form-control" name="idade" min="0">
+                </div>
+                <div class="col-md-3 mb-3">
+                    <label class="form-label">Sexo:</label>
+                    <select class="form-select" name="sexo">
+                        <option value="M">Masculino</option>
+                        <option value="F">Feminino</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Escolaridade:</label>
+                    <select class="form-select" name="escolaridade">
+                        <option value="Fundamental Incompleto">Fundamental Incompleto</option>
+                        <option value="Fundamental Completo">Fundamental Completo</option>
+                        <option value="Medio Completo">Médio Completo</option>
+                        <option value="Superior">Superior</option>
+                        <option value="Nao Alfabetizado">Não sabe ler/escrever</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-grid gap-2 mb-5 mt-3">
+        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    </div>
+</form>
