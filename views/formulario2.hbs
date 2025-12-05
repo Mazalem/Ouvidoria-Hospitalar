@@ -1,6 +1,7 @@
 <form action="/formulario/inserir" method="POST">
-    <input type="hidden" name="parte" value="3">
+    <input type="hidden" name="parte" value="2">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
+
     <div class="card">
         <div class="card-body">
             <h5 class="section-title">2. Sobre o PSF</h5>
@@ -9,11 +10,11 @@
                 <label class="form-label fw-bold">Antes de vir ao PAM, você procurou seu PSF?</label>
                 <div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_sim" value="Sim">
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_sim" value="Sim" required>
                         <label class="form-check-label" for="psf_sim">Sim</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_nao" value="Nao">
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_nao" value="Nao" required>
                         <label class="form-check-label" for="psf_nao">Não</label>
                     </div>
                 </div>
@@ -21,16 +22,65 @@
 
             <div class="mb-3">
                 <label class="form-label">Qual é o seu PSF de referência?</label>
-                <input type="text" class="form-control" name="nome_psf">
+                <select class="form-control" name="nome_psf" id="nome_psf" required>
+                    <option value="">Selecione...</option>
+                    <option value="Rosa Mística">Rosa Mística</option>
+                    <option value="Divino">Divino</option>
+                </select>
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Se não foi ao PSF, qual o principal motivo?</label>
-                <textarea class="form-control" name="motivo_nao_psf" rows="2"></textarea>
+
+                <div id="motivo_nao_psf_container">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Demora no atendimento">
+                        <label class="form-check-label">Demora no atendimento</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Unidade fechada">
+                        <label class="form-check-label">Unidade fechada</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Não conseguiu consulta">
+                        <label class="form-check-label">Não conseguiu consulta</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Preferiu vir direto ao PAM">
+                        <label class="form-check-label">Preferiu vir direto ao PAM</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <div class="d-grid gap-2 mb-5 mt-3">
         <button type="submit" class="btn btn-success btn-lg">Próxima</button>
     </div>
 </form>
+
+<script>
+    const psfSim = document.getElementById('psf_sim');
+    const psfNao = document.getElementById('psf_nao');
+    const motivoContainer = document.getElementById('motivo_nao_psf_container');
+    const checkboxes = motivoContainer.querySelectorAll('input[type="checkbox"]');
+
+    function atualizarCampos() {
+        if (psfNao.checked) {
+            checkboxes.forEach(c => c.disabled = false);
+        } else if (psfSim.checked) {
+            checkboxes.forEach(c => {
+                c.checked = false;
+                c.disabled = true;
+            });
+        }
+    }
+
+    atualizarCampos();
+
+    psfSim.addEventListener('change', atualizarCampos);
+    psfNao.addEventListener('change', atualizarCampos);
+</script>

@@ -1,14 +1,19 @@
 <form action="/formulario/inserir" method="POST">
-    <input type="hidden" name="parte" value="7">
+    <input type="hidden" name="parte" value="6">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
-    <div class="card">
+
+    <div class="card border-primary">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Comentário Livre</h5>
+        </div>
+
         <div class="card-body">
             <div class="mb-3">
-                <label class="form-label">Comentário Livre (Opcional):</label>
-                <textarea class="form-control" name="comentario" rows="3"></textarea>
+                <textarea class="form-control" name="comentario" rows="3" placeholder="(Opcional)"></textarea>
             </div>
         </div>
     </div>
+
     <div class="d-grid gap-2 mb-5 mt-3">
         <button type="submit" class="btn btn-success btn-lg">Enviar Avaliação</button>
     </div>
