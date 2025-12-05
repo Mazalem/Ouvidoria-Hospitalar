@@ -10,10 +10,6 @@ exports.registro = async function(req, res){
     res.render('registro', { title: 'Home' });
 }
 
-exports.dashboard = async function(req, res){
-    res.render('dashboard', { title: 'Home' });
-}
-
 exports.agradecimento = async function(req, res){
     res.render('agradecimento', { title: 'Home' });
 }

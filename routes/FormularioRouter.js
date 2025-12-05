@@ -4,5 +4,6 @@ var FormularioController = require('../controller/FormularioController');
 
 router.get('/listar', FormularioController.listarFormularios);
 router.post('/inserir', FormularioController.inserirFormulario);
+router.get('/graficos', FormularioController.exibirGraficos);
 
 module.exports = router;

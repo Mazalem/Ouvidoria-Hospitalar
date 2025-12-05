@@ -1,0 +1,72 @@
+<h2 class="section-title mb-4">Gráficos das Avaliações</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+
+        <div class="row g-4">
+            <!-- GRÁFICO 1 -->
+            <div class="col-md-4 col-sm-12">
+                <div class="text-center">
+                    <h5 class="fw-bold mb-3">Avaliação da Equipe</h5>
+                    <canvas id="graficoEquipe"></canvas>
+                </div>
+            </div>
+
+            <!-- GRÁFICO 2 -->
+            <div class="col-md-4 col-sm-12">
+                <div class="text-center">
+                    <h5 class="fw-bold mb-3">Limpeza</h5>
+                    <canvas id="graficoLimpeza"></canvas>
+                </div>
+            </div>
+
+            <!-- GRÁFICO 3 -->
+            <div class="col-md-4 col-sm-12">
+                <div class="text-center">
+                    <h5 class="fw-bold mb-3">Tempo de Espera</h5>
+                    <canvas id="graficoTempo"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="d-grid gap-2 mb-5 mt-3">
+    <a href="/" class="btn btn-secondary btn-lg">Voltar</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const equipe = {{{equipe}}};
+    const limpeza = {{{limpeza}}};
+    const tempo = {{{tempo}}};
+
+    function gerarGrafico(id, dados) {
+        new Chart(document.getElementById(id), {
+            type: "pie",
+            data: {
+                labels: Object.keys(dados),
+                datasets: [
+                    {
+                        data: Object.values(dados),
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "bottom"
+                    }
+                }
+            }
+        });
+    }
+
+    gerarGrafico("graficoEquipe", equipe);
+    gerarGrafico("graficoLimpeza", limpeza);
+    gerarGrafico("graficoTempo", tempo);
+</script>
