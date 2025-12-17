@@ -1,4 +1,4 @@
-<form action="/formulario/inserir" method="POST">
+<form action="/formulario/inserir" method="POST" id="formParte2">
     <input type="hidden" name="parte" value="2">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
 
@@ -36,7 +36,6 @@
                 <label class="form-label">Se não foi ao PSF, qual o principal motivo?</label>
 
                 <div id="motivo_nao_psf_container">
-
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]"
                             value="Não sabia qual era meu PSF" id="motivo_1">
@@ -69,7 +68,6 @@
                         <input type="text" class="form-control" name="motivo_nao_psf_outro" placeholder="Especifique"
                             id="motivo_outro_input">
                     </div>
-
                 </div>
             </div>
         </div>
@@ -79,21 +77,44 @@
         <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
             Voltar
         </button>
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-success btn-lg" id="btn-proxima" disabled>
             Próxima
         </button>
     </div>
 </form>
 
 <script>
-    const form = document.querySelector('form');
+    const form = document.getElementById('formParte2');
+    const btnProxima = document.getElementById('btn-proxima');
     const psfSim = document.getElementById('psf_sim');
     const psfNao = document.getElementById('psf_nao');
     const motivoSection = document.querySelector('#motivo_nao_psf_container').parentElement;
     const motivoContainer = document.getElementById('motivo_nao_psf_container');
     const checkboxes = motivoContainer.querySelectorAll('input[type="checkbox"]');
-    const outroCheckbox = motivoContainer.querySelector('input[type="checkbox"][value="Outro"]');
-    const outroInput = motivoContainer.querySelector('input[name="motivo_nao_psf_outro"]');
+    const outroCheckbox = document.getElementById('motivo_outro');
+    const outroInput = document.getElementById('motivo_outro_input');
+
+    function validarFormulario() {
+        let valido = true;
+
+        const radioProcurou = form.querySelectorAll('input[name="procurou_psf"]');
+        const procurouSelecionado = Array.from(radioProcurou).some(r => r.checked);
+        if (!procurouSelecionado) valido = false;
+
+        const nomePsf = document.getElementById('nome_psf');
+        if (!nomePsf.value) valido = false;
+
+        if (psfNao.checked) {
+            const algumCheckbox = Array.from(checkboxes).some(c => c.checked);
+            if (!algumCheckbox) {
+                valido = false;
+            } else if (outroCheckbox.checked && !outroInput.value.trim()) {
+                valido = false;
+            }
+        }
+
+        btnProxima.disabled = !valido;
+    }
 
     function atualizarVisibilidadeMotivos() {
         if (psfNao.checked) {
@@ -105,6 +126,7 @@
             outroInput.disabled = true;
             outroInput.removeAttribute('required');
         }
+        validarFormulario();
     }
 
     function atualizarOutroMotivo() {
@@ -116,9 +138,13 @@
             outroInput.disabled = true;
             outroInput.removeAttribute('required');
         }
+        validarFormulario();
     }
 
-    form.addEventListener('submit', function () {
+    form.addEventListener('input', validarFormulario);
+    form.addEventListener('change', validarFormulario);
+
+    form.addEventListener('submit', function (e) {
         if (outroCheckbox.checked) {
             outroCheckbox.checked = false;
             const textoOutro = outroInput.value.trim();
@@ -139,5 +165,5 @@
 
     atualizarVisibilidadeMotivos();
     atualizarOutroMotivo();
-
+    validarFormulario();
 </script>

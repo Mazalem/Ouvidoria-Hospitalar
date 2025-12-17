@@ -98,5 +98,70 @@ class FormularioMongo {
             console.log("Nenhum formulário para remover.");
         }
     }
+
+    async apararRespostas() {
+        await conexao_bd();
+        const collection = bd().collection("formulario");
+
+        const cursor = collection.find({});
+
+        while (await cursor.hasNext()) {
+            const doc = await cursor.next();
+            let camposParaRemover = {};
+
+            if (doc.cidade !== "Divino") {
+                camposParaRemover.zona = 1;
+                camposParaRemover.bairro = 1;
+                camposParaRemover.comunidade = 1;
+            } else {
+                if (doc.zona === "Urbana") camposParaRemover.comunidade = 1;
+                else if (doc.zona === "Rural") camposParaRemover.bairro = 1;
+            }
+
+            if (doc.procurou_psf === "Sim") {
+                camposParaRemover.motivo_nao_psf = 1;
+                camposParaRemover.motivo_nao_psf_outro = 1;
+            } else if (doc.procurou_psf === "Nao") {
+                const motivos = doc.motivo_nao_psf || [];
+                if (!motivos.includes("Outro")) camposParaRemover.motivo_nao_psf_outro = 1;
+            }
+
+            if (doc.pagou_valor === "Nao") {
+                camposParaRemover.descricao_pagamento = 1;
+            }
+
+            if (doc.internado === "Nao") {
+                camposParaRemover.dias_internacao = 1;
+                camposParaRemover.limpeza_roupas = 1;
+                camposParaRemover.alimentacao_paciente = 1;
+                camposParaRemover.tempo_visitas = 1;
+                camposParaRemover.teve_acompanhante = 1;
+                camposParaRemover.livre_escolha = 1;
+                camposParaRemover.alimentacao_acompanhante = 1;
+                camposParaRemover.conforto_acompanhante = 1;
+                camposParaRemover.motivo_sem_acompanhante = 1;
+            } else {
+                if (doc.teve_acompanhante === "Sim") {
+                    camposParaRemover.motivo_sem_acompanhante = 1;
+                } else if (doc.teve_acompanhante === "Nao") {
+                    camposParaRemover.livre_escolha = 1;
+                    camposParaRemover.alimentacao_acompanhante = 1;
+                    camposParaRemover.conforto_acompanhante = 1;
+                }
+            }
+
+            if (doc.deseja_contato === "Nao") {
+                camposParaRemover.nome_contato = 1;
+                camposParaRemover.telefone_contato = 1;
+            }
+
+            if (Object.keys(camposParaRemover).length > 0) {
+                await collection.updateOne(
+                    { _id: doc._id },
+                    { $unset: camposParaRemover }
+                );
+            }
+        }
+    }
 }
 module.exports = new FormularioMongo();

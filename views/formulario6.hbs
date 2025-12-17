@@ -106,39 +106,31 @@
                     </div>
                 </div>
 
-                <div class="mb-4" id="motivo_acomp_container" style="display: none;">
+                <div id="motivo_acomp_container" style="display: none;">
                     <label class="fw-bold mb-2 d-block">Motivo:</label>
 
                     <div class="form-check">
                         <input class="form-check-input motivo-check" type="checkbox" id="motivo1"
                             name="motivo_sem_acompanhante[]" value="Nao foi informado do direito">
-                        <label class="form-check-label" for="motivo1">
-                            Não foi informado do direito
-                        </label>
+                        <label class="form-check-label" for="motivo1">Não foi informado do direito</label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input motivo-check" type="checkbox" id="motivo2"
                             name="motivo_sem_acompanhante[]" value="Nao foi permitido">
-                        <label class="form-check-label" for="motivo2">
-                            Não foi permitido
-                        </label>
+                        <label class="form-check-label" for="motivo2">Não foi permitido</label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input motivo-check" type="checkbox" id="motivo3"
                             name="motivo_sem_acompanhante[]" value="Nao tinha acompanhante">
-                        <label class="form-check-label" for="motivo3">
-                            Não tinha acompanhante
-                        </label>
+                        <label class="form-check-label" for="motivo3">Não tinha acompanhante</label>
                     </div>
 
                     <div class="form-check">
                         <input class="form-check-input motivo-check" type="checkbox" id="motivo4"
                             name="motivo_sem_acompanhante[]" value="Foi opcao">
-                        <label class="form-check-label" for="motivo4">
-                            Foi opção
-                        </label>
+                        <label class="form-check-label" for="motivo4">Foi opção</label>
                     </div>
 
                     <div class="form-check d-flex align-items-center gap-2 mt-2">
@@ -149,10 +141,6 @@
                         <input type="text" class="form-control ms-2" id="motivo_outro_texto"
                             name="motivo_sem_acompanhante[]" placeholder="Especifique"
                             style="display:none; max-width: 300px;">
-                    </div>
-
-                    <div id="erro-checkbox" class="text-danger small mt-1" style="display: none;">
-                        Selecione pelo menos uma opção.
                     </div>
                 </div>
 
@@ -209,7 +197,7 @@
         <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
             Voltar
         </button>
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-success btn-lg" id="btn-proxima" disabled>
             Próxima
         </button>
     </div>
@@ -217,6 +205,7 @@
 
 <script>
     const form = document.getElementById('formInternamento');
+    const btnProxima = document.getElementById('btn-proxima');
     const internadoSim = document.getElementById('internado_sim');
     const internadoNao = document.getElementById('internado_nao');
     const internacaoContainer = document.getElementById('internacao_container');
@@ -228,39 +217,59 @@
 
     const motivosCheck = document.querySelectorAll('.motivo-check');
     const outroCheck = document.getElementById('motivo_outro_check');
-    const outroInputContainer = document.getElementById('outro_motivo_input_container');
     const outroInput = document.getElementById('motivo_outro_texto');
-    const erroCheckbox = document.getElementById('erro-checkbox');
 
-    function resetContainer(container) {
-        container.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(i => i.checked = false);
-        container.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
-        if (container.id === 'motivo_acomp_container') {
-            outroInputContainer.style.display = 'none';
-            erroCheckbox.style.display = 'none';
+    function validarFormulario() {
+        const obrigatorios = form.querySelectorAll('input[required]');
+        let tudoOk = true;
+
+        obrigatorios.forEach(campo => {
+            if (campo.type === 'radio') {
+                const grupo = form.querySelectorAll(`input[name="${campo.name}"]`);
+                if (!Array.from(grupo).some(r => r.checked)) tudoOk = false;
+            } else if (campo.type === 'text') {
+                if (!campo.value.trim()) tudoOk = false;
+            }
+        });
+
+        if (internadoSim.checked && acompNao.checked) {
+            const algumCheck = Array.from(motivosCheck).some(c => c.checked);
+            if (!algumCheck) tudoOk = false;
+            if (outroCheck.checked && !outroInput.value.trim()) tudoOk = false;
         }
+
+        btnProxima.disabled = !tudoOk;
     }
 
     function toggleRequired(container, isRequired) {
-        const inputs = container.querySelectorAll('input');
-        inputs.forEach(i => {
-            if (i.type === 'radio' && !i.classList.contains('motivo-check')) {
-                i.required = isRequired;
-            }
-            if (!isRequired) {
-                i.disabled = true;
-            } else {
-                i.disabled = false;
-            }
+        const radios = container.querySelectorAll('input[type="radio"]');
+        radios.forEach(r => {
+            r.required = isRequired;
+            r.disabled = !isRequired;
         });
     }
 
     function atualizarInternacao() {
         const ativo = internadoSim.checked;
-        if (!ativo) resetContainer(internacaoContainer);
         internacaoContainer.style.display = ativo ? 'block' : 'none';
+
         toggleRequired(internacaoContainer, ativo);
-        if (ativo) atualizarAcompanhante();
+
+        if (!ativo) {
+            internacaoContainer.querySelectorAll('input').forEach(i => {
+                if (i.type === 'radio' || i.type === 'checkbox') {
+                    i.checked = false;
+                } else if (i.type === 'text') {
+                    i.value = '';
+                }
+                i.disabled = true;
+            });
+            perguntasAcomp.style.display = 'none';
+            motivoAcomp.style.display = 'none';
+        } else {
+            atualizarAcompanhante();
+        }
+        validarFormulario();
     }
 
     function atualizarAcompanhante() {
@@ -268,50 +277,39 @@
             perguntasAcomp.style.display = 'block';
             motivoAcomp.style.display = 'none';
             toggleRequired(perguntasAcomp, true);
-            toggleRequired(motivoAcomp, false);
-            resetContainer(motivoAcomp);
+            motivoAcomp.querySelectorAll('input').forEach(i => {
+                i.disabled = true;
+                i.checked = false;
+            });
         } else if (acompNao.checked) {
             perguntasAcomp.style.display = 'none';
             motivoAcomp.style.display = 'block';
             toggleRequired(perguntasAcomp, false);
-            toggleRequired(motivoAcomp, true);
-            resetContainer(perguntasAcomp);
+            motivoAcomp.querySelectorAll('input').forEach(i => i.disabled = false);
         } else {
             perguntasAcomp.style.display = 'none';
             motivoAcomp.style.display = 'none';
             toggleRequired(perguntasAcomp, false);
-            toggleRequired(motivoAcomp, false);
+            motivoAcomp.querySelectorAll('input').forEach(i => i.disabled = true);
         }
+        validarFormulario();
     }
 
     outroCheck.addEventListener('change', function () {
-        if (this.checked) {
-            outroInput.style.display = 'block';
-            outroInput.required = true;
-            outroInput.disabled = false;
-        } else {
-            outroInput.style.display = 'none';
-            outroInput.required = false;
-            outroInput.disabled = true;
-            outroInput.value = '';
-        }
+        outroInput.style.display = this.checked ? 'block' : 'none';
+        validarFormulario();
     });
 
-    form.addEventListener('submit', function (e) {
-        if (internadoSim.checked && acompNao.checked) {
-            const algumCheck = Array.from(motivosCheck).some(c => c.checked);
-            if (!algumCheck) {
-                e.preventDefault();
-                erroCheckbox.style.display = 'block';
-                return false;
-            }
-        }
-    });
-
+    form.addEventListener('change', validarFormulario);
+    form.addEventListener('input', validarFormulario);
     internadoSim.addEventListener('change', atualizarInternacao);
     internadoNao.addEventListener('change', atualizarInternacao);
     acompSim.addEventListener('change', atualizarAcompanhante);
     acompNao.addEventListener('change', atualizarAcompanhante);
+
+    window.addEventListener('pageshow', () => {
+        atualizarInternacao();
+    });
 
     atualizarInternacao();
 </script>

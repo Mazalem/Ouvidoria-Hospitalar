@@ -1,4 +1,4 @@
-<form action="/formulario/inserir" method="POST">
+<form action="/formulario/inserir" method="POST" id="formParte5">
     <input type="hidden" name="parte" value="5">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
 
@@ -86,31 +86,58 @@
         <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
             Voltar
         </button>
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-success btn-lg" id="btn-proxima" disabled>
             Próxima
         </button>
     </div>
 </form>
 
 <script>
+    const form = document.getElementById('formParte5');
+    const btnProxima = document.getElementById('btn-proxima');
     const pagouSim = document.getElementById('pagou_sim');
     const pagouNao = document.getElementById('pagou_nao');
     const pagamentoContainer = document.getElementById('pagamento_container');
     const descricaoPagamento = document.getElementById('descricao_pagamento');
 
+    function validarFormulario() {
+        const obrigatorios = form.querySelectorAll('[required]');
+        let tudoOk = true;
+
+        obrigatorios.forEach(campo => {
+            if (campo.type === 'radio') {
+                const grupo = form.querySelectorAll(`input[name="${campo.name}"]`);
+                if (!Array.from(grupo).some(r => r.checked)) tudoOk = false;
+            } else {
+                if (!campo.value.trim()) tudoOk = false;
+            }
+        });
+
+        btnProxima.disabled = !tudoOk;
+    }
+
     function atualizarPagamento() {
         if (pagouSim.checked) {
             pagamentoContainer.style.display = 'block';
             descricaoPagamento.setAttribute('required', 'required');
+            descricaoPagamento.disabled = false;
         } else {
             pagamentoContainer.style.display = 'none';
             descricaoPagamento.value = '';
             descricaoPagamento.removeAttribute('required');
+            descricaoPagamento.disabled = true;
         }
+        validarFormulario();
     }
 
+    form.addEventListener('change', validarFormulario);
+    form.addEventListener('input', validarFormulario);
     pagouSim.addEventListener('change', atualizarPagamento);
     pagouNao.addEventListener('change', atualizarPagamento);
+
+    window.addEventListener('pageshow', () => {
+        atualizarPagamento();
+    });
 
     atualizarPagamento();
 </script>

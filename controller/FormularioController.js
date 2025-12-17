@@ -39,6 +39,7 @@ exports.inserirFormulario = async (req, res) => {
 exports.exibirGraficos = async (req, res) => {
     try {
         await FormulariosMongo.removerRespostasIncompletas();
+        await FormulariosMongo.apararRespostas();
 
         const formularios = await FormulariosMongo.listarTodos();
 
@@ -57,6 +58,7 @@ exports.exibirGraficos = async (req, res) => {
         const tempo = contar("avaliacao_tempo");
 
         res.render("graficos", {
+            title: 'Gráficos',
             equipe: JSON.stringify(equipe),
             limpeza: JSON.stringify(limpeza),
             tempo: JSON.stringify(tempo)

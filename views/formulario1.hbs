@@ -93,13 +93,15 @@
         <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
             Voltar
         </button>
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-success btn-lg" id="btn-proxima" disabled>
             Próxima
         </button>
     </div>
 </form>
 
 <script>
+    const form = document.getElementById('formParte1');
+    const btnProxima = document.getElementById('btn-proxima');
     const cidadeSelect = document.getElementById('cidade');
     const divinoOptions = document.getElementById('divino-options');
     const radioUrbana = document.getElementById('urbana');
@@ -107,18 +109,41 @@
     const bairro = document.getElementById('bairro');
     const comunidade = document.getElementById('comunidade');
 
+    function validarFormulario() {
+        const inputsObrigatorios = form.querySelectorAll('[required]');
+        let tudoPreenchido = true;
+
+        inputsObrigatorios.forEach(input => {
+            if (input.type === 'radio') {
+                const name = input.name;
+                const radioGroup = form.querySelectorAll(`input[name="${name}"]`);
+                const algumSelecionado = Array.from(radioGroup).some(r => r.checked);
+                if (!algumSelecionado) tudoPreenchido = false;
+            } else {
+                if (!input.value || input.value === "") {
+                    tudoPreenchido = false;
+                }
+            }
+        });
+
+        btnProxima.disabled = !tudoPreenchido;
+    }
+
     function atualizarCampos() {
         if (radioUrbana.checked) {
             bairro.disabled = false;
             bairro.required = true;
             comunidade.disabled = true;
             comunidade.required = false;
+            comunidade.value = ""; 
         } else if (radioRural.checked) {
             comunidade.disabled = false;
             comunidade.required = true;
             bairro.disabled = true;
             bairro.required = false;
+            bairro.value = ""; 
         }
+        validarFormulario();
     }
 
     function gerenciarDivino() {
@@ -135,12 +160,20 @@
             radioRural.disabled = true;
             radioUrbana.required = false;
             radioRural.required = false;
+            radioUrbana.checked = false;
+            radioRural.checked = false;
             bairro.disabled = true;
             bairro.required = false;
+            bairro.value = "";
             comunidade.disabled = true;
             comunidade.required = false;
+            comunidade.value = "";
+            validarFormulario();
         }
     }
+
+    form.addEventListener('change', validarFormulario);
+    form.addEventListener('input', validarFormulario);
 
     radioUrbana.addEventListener('change', atualizarCampos);
     radioRural.addEventListener('change', atualizarCampos);
@@ -148,7 +181,9 @@
 
     window.addEventListener('pageshow', function(event) {
         gerenciarDivino();
+        validarFormulario();
     });
 
     gerenciarDivino();
+    validarFormulario();
 </script>

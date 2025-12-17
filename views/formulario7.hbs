@@ -13,8 +13,8 @@
                 <p class="small text-muted">
                     Espaço para deixar sua sugestão ou relatar algo importante:
                 </p>
-                <textarea class="form-control" name="comentarios_livres"
-                    rows="5" placeholder="Escreva aqui..."></textarea>
+                <textarea class="form-control" name="comentarios_livres" rows="5"
+                    placeholder="Escreva aqui..."></textarea>
             </div>
 
             <hr>
@@ -28,16 +28,16 @@
                 </p>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="deseja_contato"
-                        id="contato_sim" value="Sim" required>
+                    <input class="form-check-input" type="radio" name="deseja_contato" id="contato_sim" value="Sim"
+                        required>
                     <label class="form-check-label text-success" for="contato_sim">
                         Sim, desejo ser contactado
                     </label>
                 </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="deseja_contato"
-                        id="contato_nao" value="Nao" required>
+                    <input class="form-check-input" type="radio" name="deseja_contato" id="contato_nao" value="Nao"
+                        required>
                     <label class="form-check-label text-danger" for="contato_nao">
                         Não desejo ser contactado
                     </label>
@@ -47,17 +47,13 @@
             <div id="contato_container" class="mt-3" style="display: none;">
                 <div class="mb-3">
                     <label class="form-label">Nome</label>
-                    <input type="text" class="form-control"
-                        id="nome_contato"
-                        name="nome_contato"
+                    <input type="text" class="form-control" id="nome_contato" name="nome_contato"
                         placeholder="Digite seu nome">
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label">Telefone</label>
-                    <input type="tel" class="form-control"
-                        id="telefone_contato"
-                        name="telefone_contato"
+                    <input type="tel" class="form-control" id="telefone_contato" name="telefone_contato"
                         placeholder="(xx) xxxxx-xxxx">
                 </div>
             </div>
@@ -69,17 +65,36 @@
         <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
             Voltar
         </button>
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-success btn-lg" id="btn-finalizar" disabled>
             Finalizar Pesquisa
         </button>
     </div>
 </form>
 
 <script>
+    const form = document.getElementById('formFinal');
+    const btnFinalizar = document.getElementById('btn-finalizar');
     const contatoSim = document.getElementById('contato_sim');
     const contatoNao = document.getElementById('contato_nao');
     const contatoContainer = document.getElementById('contato_container');
     const inputsContato = contatoContainer.querySelectorAll('input');
+    const campoComentarios = form.querySelector('textarea[name="comentarios_livres"]');
+
+    function validarFormulario() {
+        const obrigatorios = form.querySelectorAll('[required]');
+        let tudoOk = true;
+
+        obrigatorios.forEach(campo => {
+            if (campo.type === 'radio') {
+                const grupo = form.querySelectorAll(`input[name="${campo.name}"]`);
+                if (!Array.from(grupo).some(r => r.checked)) tudoOk = false;
+            } else {
+                if (!campo.value.trim()) tudoOk = false;
+            }
+        });
+
+        btnFinalizar.disabled = !tudoOk;
+    }
 
     function atualizarContato() {
         if (contatoSim.checked) {
@@ -96,10 +111,24 @@
                 i.disabled = true;
             });
         }
+        validarFormulario();
     }
 
+    form.addEventListener('change', validarFormulario);
+    form.addEventListener('input', validarFormulario);
     contatoSim.addEventListener('change', atualizarContato);
     contatoNao.addEventListener('change', atualizarContato);
+
+    form.addEventListener('submit', function (e) {
+        if (campoComentarios.value.trim() === "") {
+            campoComentarios.disabled = true;
+        }
+    });
+
+    window.addEventListener('pageshow', () => {
+        campoComentarios.disabled = false;
+        atualizarContato();
+    });
 
     atualizarContato();
 </script>

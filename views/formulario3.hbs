@@ -1,4 +1,4 @@
-<form action="/formulario/inserir" method="POST">
+<form action="/formulario/inserir" method="POST" id="formParte3">
     <input type="hidden" name="parte" value="3">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
 
@@ -92,8 +92,46 @@
         <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
             Voltar
         </button>
-        <button type="submit" class="btn btn-success btn-lg">
+        <button type="submit" class="btn btn-success btn-lg" id="btn-proxima" disabled>
             Próxima
         </button>
     </div>
 </form>
+
+<script>
+    const form = document.getElementById('formParte3');
+    const btnProxima = document.getElementById('btn-proxima');
+
+    function validarFormulario() {
+        const camposObrigatorios = form.querySelectorAll('[required]');
+        let tudoValido = true;
+
+        camposObrigatorios.forEach(campo => {
+            if (campo.type === 'radio') {
+                const radioGroup = form.querySelectorAll(`input[name="${campo.name}"]`);
+                const selecionado = Array.from(radioGroup).some(r => r.checked);
+                if (!selecionado) tudoValido = false;
+            } else if (campo.type === 'number') {
+                const valor = parseInt(campo.value);
+                const min = parseInt(campo.min);
+                const max = parseInt(campo.max);
+                if (isNaN(valor) || valor < min || valor > max) {
+                    tudoValido = false;
+                }
+            } else {
+                if (!campo.value || campo.value.trim() === "") {
+                    tudoValido = false;
+                }
+            }
+        });
+
+        btnProxima.disabled = !tudoValido;
+    }
+
+    form.addEventListener('input', validarFormulario);
+    form.addEventListener('change', validarFormulario);
+
+    window.addEventListener('pageshow', validarFormulario);
+
+    validarFormulario();
+</script>
