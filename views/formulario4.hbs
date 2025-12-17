@@ -7,98 +7,240 @@
             <h5 class="section-title">4. Avaliação do Atendimento</h5>
             <p class="text-muted small">Avalie os itens abaixo:</p>
 
-            <div class="mb-4 bg-light p-3 rounded">
-                <label class="fw-bold d-block mb-2">Tempo de espera para ser atendido:</label>
-                <div class="d-flex flex-wrap gap-2">
-                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_mb" value="Muito Bom" required>
-                    <label class="btn btn-outline-success btn-sm" for="tempo_mb">Muito Bom</label>
+            <fieldset class="mb-4 p-3 bg-light rounded">
+                <legend class="fw-bold fs-6">Experiência no atendimento</legend>
 
-                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_b" value="Bom">
-                    <label class="btn btn-outline-primary btn-sm" for="tempo_b">Bom</label>
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Tempo de espera para atendimento</label>
+                    <p class="small text-muted">Quanto tempo você aguardou para ser atendido?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="tempo_espera" id="t1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="t1">Muito longo</label>
 
-                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_r" value="Regular">
-                    <label class="btn btn-outline-warning btn-sm" for="tempo_r">Regular</label>
+                        <input class="btn-check" type="radio" name="tempo_espera" id="t2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="t2">Longo</label>
 
-                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_ruim" value="Ruim">
-                    <label class="btn btn-outline-danger btn-sm" for="tempo_ruim">Ruim</label>
+                        <input class="btn-check" type="radio" name="tempo_espera" id="t3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="t3">Aceitável</label>
 
-                    <input type="radio" class="btn-check" name="avaliacao_tempo" id="tempo_muito_ruim" value="Muito Ruim">
-                    <label class="btn btn-outline-dark btn-sm" for="tempo_muito_ruim">Muito Ruim</label>
-                </div>
-            </div>
+                        <input class="btn-check" type="radio" name="tempo_espera" id="t4" value="4">
+                        <label class="btn btn-outline-info w-100" for="t4">Rápido</label>
 
-            <div class="mb-4 bg-light p-3 rounded">
-                <label class="fw-bold d-block mb-2">Limpeza dos ambientes:</label>
-                <div class="d-flex flex-wrap gap-2">
-                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_mb" value="Muito Bom" required>
-                    <label class="btn btn-outline-success btn-sm" for="limp_mb">Muito Bom</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_b" value="Bom">
-                    <label class="btn btn-outline-primary btn-sm" for="limp_b">Bom</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_r" value="Regular">
-                    <label class="btn btn-outline-warning btn-sm" for="limp_r">Regular</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_ruim" value="Ruim">
-                    <label class="btn btn-outline-danger btn-sm" for="limp_ruim">Ruim</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_limpeza" id="limp_muito_ruim" value="Muito Ruim">
-                    <label class="btn btn-outline-dark btn-sm" for="limp_muito_ruim">Muito Ruim</label>
-                </div>
-            </div>
-
-            <div class="mb-4 bg-light p-3 rounded">
-                <label class="fw-bold d-block mb-2">Atendimento da equipe de saúde (Médicos/Enfermeiros):</label>
-                <div class="d-flex flex-wrap gap-2">
-                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_mb" value="Muito Bom" required>
-                    <label class="btn btn-outline-success btn-sm" for="equipe_mb">Muito Bom</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_b" value="Bom">
-                    <label class="btn btn-outline-primary btn-sm" for="equipe_b">Bom</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_r" value="Regular">
-                    <label class="btn btn-outline-warning btn-sm" for="equipe_r">Regular</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_ruim" value="Ruim">
-                    <label class="btn btn-outline-danger btn-sm" for="equipe_ruim">Ruim</label>
-
-                    <input type="radio" class="btn-check" name="avaliacao_equipe" id="equipe_muito_ruim" value="Muito Ruim">
-                    <label class="btn btn-outline-dark btn-sm" for="equipe_muito_ruim">Muito Ruim</label>
-                </div>
-            </div>
-
-            <div class="mb-4">
-                <label class="form-label fw-bold">O(a) senhor(a) sentiu segurança/confiança na equipe?</label>
-                <div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="seguranca" id="seg_sim" value="Sim" required>
-                        <label class="form-check-label" for="seg_sim">Sim</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="seguranca" id="seg_nao" value="Nao">
-                        <label class="form-check-label" for="seg_nao">Não</label>
+                        <input class="btn-check" type="radio" name="tempo_espera" id="t5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="t5">Muito rápido</label>
                     </div>
                 </div>
-            </div>
 
-            <div class="mb-4">
-                <label class="form-label fw-bold">Como o(a) senhor(a) avalia as informações e esclarecimentos que você teve sobre seu estado de saúde no estabelecimento?</label>
-                <div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="informacoes_saude" id="info_sim" value="Sim" required>
-                        <label class="form-check-label" for="info_sim">Sim</label>
-                    </div>
-                    <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="informacoes_saude" id="info_nao" value="Nao">
-                        <label class="form-check-label" for="info_nao">Não</label>
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Agilidade no atendimento pelos profissionais</label>
+                    <p class="small text-muted">Como você avaliaria a rapidez e a eficiência dos profissionais no atendimento?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="agilidade" id="a1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="a1">Muito lenta</label>
+
+                        <input class="btn-check" type="radio" name="agilidade" id="a2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="a2">Lenta</label>
+
+                        <input class="btn-check" type="radio" name="agilidade" id="a3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="a3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="agilidade" id="a4" value="4">
+                        <label class="btn btn-outline-info w-100" for="a4">Ágil</label>
+
+                        <input class="btn-check" type="radio" name="agilidade" id="a5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="a5">Muito ágil</label>
                     </div>
                 </div>
-            </div>
+            </fieldset>
 
+            <fieldset class="mb-4 p-3 bg-light rounded">
+                <legend class="fw-bold fs-6">Estrutura e ambiente</legend>
+
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Limpeza dos ambientes</label>
+                    <p class="small text-muted">Como você avaliaria a limpeza dos ambientes no hospital?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="limpeza" id="l1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="l1">Muito ruim</label>
+
+                        <input class="btn-check" type="radio" name="limpeza" id="l2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="l2">Ruim</label>
+
+                        <input class="btn-check" type="radio" name="limpeza" id="l3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="l3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="limpeza" id="l4" value="4">
+                        <label class="btn btn-outline-info w-100" for="l4">Boa</label>
+
+                        <input class="btn-check" type="radio" name="limpeza" id="l5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="l5">Excelente</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Sinalização e facilidade para encontrar setores</label>
+                    <p class="small text-muted">Foi fácil encontrar os diferentes setores do hospital?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="sinalizacao" id="s1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="s1">Muito difícil</label>
+
+                        <input class="btn-check" type="radio" name="sinalizacao" id="s2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="s2">Difícil</label>
+
+                        <input class="btn-check" type="radio" name="sinalizacao" id="s3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="s3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="sinalizacao" id="s4" value="4">
+                        <label class="btn btn-outline-info w-100" for="s4">Fácil</label>
+
+                        <input class="btn-check" type="radio" name="sinalizacao" id="s5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="s5">Muito fácil</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-4 p-3 bg-light rounded">
+                <legend class="fw-bold fs-6">Atendimento humano</legend>
+
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Atendimento da recepção</label>
+                    <p class="small text-muted">Como você avaliaria o atendimento recebido na recepção?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="recepcao" id="r1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="r1">Muito insatisfatório</label>
+
+                        <input class="btn-check" type="radio" name="recepcao" id="r2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="r2">Insatisfatório</label>
+
+                        <input class="btn-check" type="radio" name="recepcao" id="r3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="r3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="recepcao" id="r4" value="4">
+                        <label class="btn btn-outline-info w-100" for="r4">Bom</label>
+
+                        <input class="btn-check" type="radio" name="recepcao" id="r5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="r5">Excelente</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Atendimento da equipe de saúde</label>
+                    <p class="small text-muted">Como você avaliaria o atendimento da equipe de saúde?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="equipe" id="e1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="e1">Muito insatisfatório</label>
+
+                        <input class="btn-check" type="radio" name="equipe" id="e2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="e2">Insatisfatório</label>
+
+                        <input class="btn-check" type="radio" name="equipe" id="e3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="e3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="equipe" id="e4" value="4">
+                        <label class="btn btn-outline-info w-100" for="e4">Bom</label>
+
+                        <input class="btn-check" type="radio" name="equipe" id="e5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="e5">Excelente</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-4 p-3 bg-light rounded">
+                <legend class="fw-bold fs-6">Confiança e comunicação</legend>
+
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Segurança e confiança na equipe</label>
+                    <p class="small text-muted">Você sentiu confiança na equipe de atendimento?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="seguranca" id="sg1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="sg1">Nenhuma confiança</label>
+
+                        <input class="btn-check" type="radio" name="seguranca" id="sg2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="sg2">Pouca confiança</label>
+
+                        <input class="btn-check" type="radio" name="seguranca" id="sg3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="sg3">Neutra</label>
+
+                        <input class="btn-check" type="radio" name="seguranca" id="sg4" value="4">
+                        <label class="btn btn-outline-info w-100" for="sg4">Confiante</label>
+
+                        <input class="btn-check" type="radio" name="seguranca" id="sg5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="sg5">Total confiança</label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold mb-2 d-block">Informações e esclarecimentos sobre seu estado de saúde</label>
+                    <p class="small text-muted">As informações sobre seu estado de saúde foram claras?</p>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="informacoes" id="i1" value="1" required>
+                        <label class="btn btn-outline-danger w-100" for="i1">Nada claros</label>
+
+                        <input class="btn-check" type="radio" name="informacoes" id="i2" value="2">
+                        <label class="btn btn-outline-warning w-100" for="i2">Pouco claros</label>
+
+                        <input class="btn-check" type="radio" name="informacoes" id="i3" value="3">
+                        <label class="btn btn-outline-secondary w-100" for="i3">Razoáveis</label>
+
+                        <input class="btn-check" type="radio" name="informacoes" id="i4" value="4">
+                        <label class="btn btn-outline-info w-100" for="i4">Claros</label>
+
+                        <input class="btn-check" type="radio" name="informacoes" id="i5" value="5">
+                        <label class="btn btn-outline-primary w-100" for="i5">Muito claros</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="mb-4 p-3 bg-light rounded">
+                <legend class="fw-bold fs-6">Probabilidade de recomendar</legend>
+                <p class="small text-muted">Qual a chance de você indicar os serviços do PAM/Hospital para um amigo ou familiar?</p>
+                <div class="mb-3">
+                    <p class="small text-muted">0 = Nada provável | 10 = Extremamente provável</p>
+                    <div class="btn-group w-100 d-flex flex-wrap" role="group">
+                        <input type="radio" class="btn-check" name="nps" id="nps0" value="0" required>
+                        <label class="btn btn-outline-danger" for="nps0">0</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps1" value="1">
+                        <label class="btn btn-outline-danger" for="nps1">1</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps2" value="2">
+                        <label class="btn btn-outline-danger" for="nps2">2</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps3" value="3">
+                        <label class="btn btn-outline-warning" for="nps3">3</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps4" value="4">
+                        <label class="btn btn-outline-warning" for="nps4">4</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps5" value="5">
+                        <label class="btn btn-outline-warning" for="nps5">5</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps6" value="6">
+                        <label class="btn btn-outline-info" for="nps6">6</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps7" value="7">
+                        <label class="btn btn-outline-info" for="nps7">7</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps8" value="8">
+                        <label class="btn btn-outline-primary" for="nps8">8</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps9" value="9">
+                        <label class="btn btn-outline-success" for="nps9">9</label>
+
+                        <input type="radio" class="btn-check" name="nps" id="nps10" value="10">
+                        <label class="btn btn-outline-success" for="nps10">10</label>
+                    </div>
+                </div>
+            </fieldset>
         </div>
     </div>
 
-    <div class="d-grid gap-2 mb-5 mt-3">
-        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    <div class="d-grid gap-2 mb-5 mt-3" style="grid-template-columns: 1fr 2fr;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
+            Voltar
+        </button>
+        <button type="submit" class="btn btn-success btn-lg">
+            Próxima
+        </button>
     </div>
 </form>

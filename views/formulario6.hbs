@@ -1,20 +1,317 @@
-<form action="/formulario/inserir" method="POST">
+<form action="/formulario/inserir" method="POST" id="formInternamento">
     <input type="hidden" name="parte" value="6">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
 
-    <div class="card border-primary">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Comentário Livre</h5>
-        </div>
-
+    <div class="card">
         <div class="card-body">
-            <div class="mb-3">
-                <textarea class="form-control" name="comentario" rows="3" placeholder="(Opcional)"></textarea>
+            <h5 class="section-title">6. Internamento</h5>
+
+            <div class="mb-4">
+                <label class="fw-bold mb-2 d-block">Você ficou internado(a)?</label>
+                <div class="d-grid gap-2" style="grid-template-columns: repeat(2,1fr);">
+                    <input class="btn-check" type="radio" name="internado" id="internado_sim" value="Sim" required>
+                    <label class="btn btn-outline-success" for="internado_sim">Sim</label>
+
+                    <input class="btn-check" type="radio" name="internado" id="internado_nao" value="Nao" required>
+                    <label class="btn btn-outline-danger" for="internado_nao">Não</label>
+                </div>
+            </div>
+
+            <div id="internacao_container" style="display: none;">
+                <div class="mb-4">
+                    <label class="fw-bold mb-2 d-block">Por quantos dias?</label>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(4,1fr);">
+                        <input class="btn-check" type="radio" name="dias_internacao" id="d1" value="Menos de 24h">
+                        <label class="btn btn-outline-secondary" for="d1">Menos de 24h</label>
+
+                        <input class="btn-check" type="radio" name="dias_internacao" id="d2" value="1-3 dias">
+                        <label class="btn btn-outline-secondary" for="d2">1–3 dias</label>
+
+                        <input class="btn-check" type="radio" name="dias_internacao" id="d3" value="4-10 dias">
+                        <label class="btn btn-outline-secondary" for="d3">4–10 dias</label>
+
+                        <input class="btn-check" type="radio" name="dias_internacao" id="d4" value="Mais de 10 dias">
+                        <label class="btn btn-outline-secondary" for="d4">Mais de 10 dias</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="fw-bold mb-2 d-block">Limpeza e conservação das roupas fornecidas</label>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="limpeza_roupas" id="lr1" value="1">
+                        <label class="btn btn-outline-danger" for="lr1">Muito ruim</label>
+
+                        <input class="btn-check" type="radio" name="limpeza_roupas" id="lr2" value="2">
+                        <label class="btn btn-outline-warning" for="lr2">Ruim</label>
+
+                        <input class="btn-check" type="radio" name="limpeza_roupas" id="lr3" value="3">
+                        <label class="btn btn-outline-secondary" for="lr3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="limpeza_roupas" id="lr4" value="4">
+                        <label class="btn btn-outline-info" for="lr4">Boa</label>
+
+                        <input class="btn-check" type="radio" name="limpeza_roupas" id="lr5" value="5">
+                        <label class="btn btn-outline-primary" for="lr5">Excelente</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="fw-bold mb-2 d-block">Qualidade da alimentação durante a internação</label>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="alimentacao_paciente" id="ap1" value="1">
+                        <label class="btn btn-outline-danger" for="ap1">Não foi fornecida</label>
+
+                        <input class="btn-check" type="radio" name="alimentacao_paciente" id="ap2" value="2">
+                        <label class="btn btn-outline-warning" for="ap2">Ruim</label>
+
+                        <input class="btn-check" type="radio" name="alimentacao_paciente" id="ap3" value="3">
+                        <label class="btn btn-outline-secondary" for="ap3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="alimentacao_paciente" id="ap4" value="4">
+                        <label class="btn btn-outline-info" for="ap4">Boa</label>
+
+                        <input class="btn-check" type="radio" name="alimentacao_paciente" id="ap5" value="5">
+                        <label class="btn btn-outline-primary" for="ap5">Excelente</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="fw-bold mb-2 d-block">Tempo de permanência permitido para visitas</label>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                        <input class="btn-check" type="radio" name="tempo_visitas" id="tv1" value="1">
+                        <label class="btn btn-outline-danger" for="tv1">Muito insuficiente</label>
+
+                        <input class="btn-check" type="radio" name="tempo_visitas" id="tv2" value="2">
+                        <label class="btn btn-outline-warning" for="tv2">Insuficiente</label>
+
+                        <input class="btn-check" type="radio" name="tempo_visitas" id="tv3" value="3">
+                        <label class="btn btn-outline-secondary" for="tv3">Regular</label>
+
+                        <input class="btn-check" type="radio" name="tempo_visitas" id="tv4" value="4">
+                        <label class="btn btn-outline-info" for="tv4">Adequado</label>
+
+                        <input class="btn-check" type="radio" name="tempo_visitas" id="tv5" value="5">
+                        <label class="btn btn-outline-primary" for="tv5">Excelente</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label class="fw-bold mb-2 d-block">Você teve acompanhante?</label>
+                    <div class="d-grid gap-2" style="grid-template-columns: repeat(2,1fr);">
+                        <input class="btn-check" type="radio" name="teve_acompanhante" id="acomp_sim" value="Sim">
+                        <label class="btn btn-outline-success" for="acomp_sim">Sim</label>
+
+                        <input class="btn-check" type="radio" name="teve_acompanhante" id="acomp_nao" value="Nao">
+                        <label class="btn btn-outline-danger" for="acomp_nao">Não</label>
+                    </div>
+                </div>
+
+                <div class="mb-4" id="motivo_acomp_container" style="display: none;">
+                    <label class="fw-bold mb-2 d-block">Motivo:</label>
+
+                    <div class="form-check">
+                        <input class="form-check-input motivo-check" type="checkbox" id="motivo1"
+                            name="motivo_sem_acompanhante[]" value="Nao foi informado do direito">
+                        <label class="form-check-label" for="motivo1">
+                            Não foi informado do direito
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input motivo-check" type="checkbox" id="motivo2"
+                            name="motivo_sem_acompanhante[]" value="Nao foi permitido">
+                        <label class="form-check-label" for="motivo2">
+                            Não foi permitido
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input motivo-check" type="checkbox" id="motivo3"
+                            name="motivo_sem_acompanhante[]" value="Nao tinha acompanhante">
+                        <label class="form-check-label" for="motivo3">
+                            Não tinha acompanhante
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input motivo-check" type="checkbox" id="motivo4"
+                            name="motivo_sem_acompanhante[]" value="Foi opcao">
+                        <label class="form-check-label" for="motivo4">
+                            Foi opção
+                        </label>
+                    </div>
+
+                    <div class="form-check d-flex align-items-center gap-2 mt-2">
+                        <input class="form-check-input motivo-check" type="checkbox" id="motivo_outro_check"
+                            value="Outro">
+                        <label class="form-check-label" for="motivo_outro_check">Outro</label>
+
+                        <input type="text" class="form-control ms-2" id="motivo_outro_texto"
+                            name="motivo_sem_acompanhante[]" placeholder="Especifique"
+                            style="display:none; max-width: 300px;">
+                    </div>
+
+                    <div id="erro-checkbox" class="text-danger small mt-1" style="display: none;">
+                        Selecione pelo menos uma opção.
+                    </div>
+                </div>
+
+                <div id="perguntas_acomp_container" style="display: none;">
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2 d-block">Acompanhante era de livre escolha?</label>
+                        <div class="d-grid gap-2" style="grid-template-columns: repeat(2,1fr);">
+                            <input class="btn-check" type="radio" name="livre_escolha" id="le_sim" value="Sim">
+                            <label class="btn btn-outline-success" for="le_sim">Sim</label>
+
+                            <input class="btn-check" type="radio" name="livre_escolha" id="le_nao" value="Nao">
+                            <label class="btn btn-outline-danger" for="le_nao">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2 d-block">O hospital forneceu alimentação ao acompanhante?</label>
+                        <div class="d-grid gap-2" style="grid-template-columns: repeat(2,1fr);">
+                            <input class="btn-check" type="radio" name="alimentacao_acompanhante" id="aa_sim"
+                                value="Sim">
+                            <label class="btn btn-outline-success" for="aa_sim">Sim</label>
+
+                            <input class="btn-check" type="radio" name="alimentacao_acompanhante" id="aa_nao"
+                                value="Nao">
+                            <label class="btn btn-outline-danger" for="aa_nao">Não</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="fw-bold mb-2 d-block">Conforto das acomodações para acompanhante</label>
+                        <div class="d-grid gap-2" style="grid-template-columns: repeat(5,1fr);">
+                            <input class="btn-check" type="radio" name="conforto_acompanhante" id="ca1" value="1">
+                            <label class="btn btn-outline-danger" for="ca1">Muito ruim</label>
+
+                            <input class="btn-check" type="radio" name="conforto_acompanhante" id="ca2" value="2">
+                            <label class="btn btn-outline-warning" for="ca2">Ruim</label>
+
+                            <input class="btn-check" type="radio" name="conforto_acompanhante" id="ca3" value="3">
+                            <label class="btn btn-outline-secondary" for="ca3">Regular</label>
+
+                            <input class="btn-check" type="radio" name="conforto_acompanhante" id="ca4" value="4">
+                            <label class="btn btn-outline-info" for="ca4">Bom</label>
+
+                            <input class="btn-check" type="radio" name="conforto_acompanhante" id="ca5" value="5">
+                            <label class="btn btn-outline-primary" for="ca5">Excelente</label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="d-grid gap-2 mb-5 mt-3">
-        <button type="submit" class="btn btn-success btn-lg">Enviar Avaliação</button>
+    <div class="d-grid gap-2 mb-5 mt-3" style="grid-template-columns: 1fr 2fr;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
+            Voltar
+        </button>
+        <button type="submit" class="btn btn-success btn-lg">
+            Próxima
+        </button>
     </div>
 </form>
+
+<script>
+    const form = document.getElementById('formInternamento');
+    const internadoSim = document.getElementById('internado_sim');
+    const internadoNao = document.getElementById('internado_nao');
+    const internacaoContainer = document.getElementById('internacao_container');
+
+    const acompSim = document.getElementById('acomp_sim');
+    const acompNao = document.getElementById('acomp_nao');
+    const motivoAcomp = document.getElementById('motivo_acomp_container');
+    const perguntasAcomp = document.getElementById('perguntas_acomp_container');
+
+    const motivosCheck = document.querySelectorAll('.motivo-check');
+    const outroCheck = document.getElementById('motivo_outro_check');
+    const outroInputContainer = document.getElementById('outro_motivo_input_container');
+    const outroInput = document.getElementById('motivo_outro_texto');
+    const erroCheckbox = document.getElementById('erro-checkbox');
+
+    function resetContainer(container) {
+        container.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(i => i.checked = false);
+        container.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+        if (container.id === 'motivo_acomp_container') {
+            outroInputContainer.style.display = 'none';
+            erroCheckbox.style.display = 'none';
+        }
+    }
+
+    function toggleRequired(container, isRequired) {
+        const inputs = container.querySelectorAll('input');
+        inputs.forEach(i => {
+            if (i.type === 'radio' && !i.classList.contains('motivo-check')) {
+                i.required = isRequired;
+            }
+            if (!isRequired) {
+                i.disabled = true;
+            } else {
+                i.disabled = false;
+            }
+        });
+    }
+
+    function atualizarInternacao() {
+        const ativo = internadoSim.checked;
+        if (!ativo) resetContainer(internacaoContainer);
+        internacaoContainer.style.display = ativo ? 'block' : 'none';
+        toggleRequired(internacaoContainer, ativo);
+        if (ativo) atualizarAcompanhante();
+    }
+
+    function atualizarAcompanhante() {
+        if (acompSim.checked) {
+            perguntasAcomp.style.display = 'block';
+            motivoAcomp.style.display = 'none';
+            toggleRequired(perguntasAcomp, true);
+            toggleRequired(motivoAcomp, false);
+            resetContainer(motivoAcomp);
+        } else if (acompNao.checked) {
+            perguntasAcomp.style.display = 'none';
+            motivoAcomp.style.display = 'block';
+            toggleRequired(perguntasAcomp, false);
+            toggleRequired(motivoAcomp, true);
+            resetContainer(perguntasAcomp);
+        } else {
+            perguntasAcomp.style.display = 'none';
+            motivoAcomp.style.display = 'none';
+            toggleRequired(perguntasAcomp, false);
+            toggleRequired(motivoAcomp, false);
+        }
+    }
+
+    outroCheck.addEventListener('change', function () {
+        if (this.checked) {
+            outroInput.style.display = 'block';
+            outroInput.required = true;
+            outroInput.disabled = false;
+        } else {
+            outroInput.style.display = 'none';
+            outroInput.required = false;
+            outroInput.disabled = true;
+            outroInput.value = '';
+        }
+    });
+
+    form.addEventListener('submit', function (e) {
+        if (internadoSim.checked && acompNao.checked) {
+            const algumCheck = Array.from(motivosCheck).some(c => c.checked);
+            if (!algumCheck) {
+                e.preventDefault();
+                erroCheckbox.style.display = 'block';
+                return false;
+            }
+        }
+    });
+
+    internadoSim.addEventListener('change', atualizarInternacao);
+    internadoNao.addEventListener('change', atualizarInternacao);
+    acompSim.addEventListener('change', atualizarAcompanhante);
+    acompNao.addEventListener('change', atualizarAcompanhante);
+
+    atualizarInternacao();
+</script>

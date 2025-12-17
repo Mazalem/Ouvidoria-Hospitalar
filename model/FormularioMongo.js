@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { ObjectId } = require('mongodb');
 const mongodb = require("mongodb");
 
 const ClienteMongo = mongodb.MongoClient;
@@ -63,29 +64,39 @@ class FormularioMongo {
         await conexao_bd();
         const collection = bd().collection("formulario");
 
+        const umMinutoAtras = new Date(Date.now() - 60000);
+
         const camposObrigatorios = [
             "unidade",
             "procurou_psf",
             "perfil_usuario",
-            "avaliacao_tempo",
-            "nps"
+            "tempo_espera",
+            "sabe_reclamar",
+            "internado"
         ];
-        const incompletos = await collection.find({
-            $or: camposObrigatorios.map(campo => ({ [campo]: { $exists: false } }))
-        }).toArray();
 
-        if (incompletos.length > 0) {
-            const ids = incompletos.map(doc => doc._id);
+        const filtroIncompletos = {
+            $or: [
+                ...camposObrigatorios.map(campo => ({ [campo]: { $exists: false } })),
+                { idFormulario: { $exists: true } },
+                { parte: { $exists: true } }
+            ]
+        };
 
-            await collection.deleteMany({
-                _id: { $in: ids }
-            });
+        const queryFinal = {
+            $and: [
+                filtroIncompletos,
+                { _id: { $lt: ObjectId.createFromTime(Math.floor(umMinutoAtras.getTime() / 1000)) } }
+            ]
+        };
+
+        const resultado = await collection.deleteMany(queryFinal);
+
+        if (resultado.deletedCount > 0) {
+            console.log(`${resultado.deletedCount} formulários incompletos ou temporários removidos.`);
         } else {
-            console.log("Nenhum formulário incompleto encontrado.");
+            console.log("Nenhum formulário para remover.");
         }
     }
-
-
-
 }
 module.exports = new FormularioMongo();

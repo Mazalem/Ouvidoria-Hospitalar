@@ -1,0 +1,105 @@
+<form action="/formulario/inserir" method="POST" id="formFinal">
+    <input type="hidden" name="parte" value="7">
+    <input type="hidden" name="idFormulario" value="{{idFormulario}}">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">7. Comentários Finais</h5>
+
+            <div class="mb-4">
+                <label class="fw-bold mb-2 d-block">
+                    Comentários livres (opcional)
+                </label>
+                <p class="small text-muted">
+                    Espaço para deixar sua sugestão ou relatar algo importante:
+                </p>
+                <textarea class="form-control" name="comentarios_livres"
+                    rows="5" placeholder="Escreva aqui..."></textarea>
+            </div>
+
+            <hr>
+
+            <div class="mb-3">
+                <label class="fw-bold d-block">
+                    Deseja ser contactado?
+                </label>
+                <p class="small text-muted">
+                    Aviso: Caso aceite contato, sua pesquisa deixará de ser anônima.
+                </p>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deseja_contato"
+                        id="contato_sim" value="Sim" required>
+                    <label class="form-check-label text-success" for="contato_sim">
+                        Sim, desejo ser contactado
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="deseja_contato"
+                        id="contato_nao" value="Nao" required>
+                    <label class="form-check-label text-danger" for="contato_nao">
+                        Não desejo ser contactado
+                    </label>
+                </div>
+            </div>
+
+            <div id="contato_container" class="mt-3" style="display: none;">
+                <div class="mb-3">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control"
+                        id="nome_contato"
+                        name="nome_contato"
+                        placeholder="Digite seu nome">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Telefone</label>
+                    <input type="tel" class="form-control"
+                        id="telefone_contato"
+                        name="telefone_contato"
+                        placeholder="(xx) xxxxx-xxxx">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 mb-5 mt-3" style="grid-template-columns: 1fr 2fr;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
+            Voltar
+        </button>
+        <button type="submit" class="btn btn-success btn-lg">
+            Finalizar Pesquisa
+        </button>
+    </div>
+</form>
+
+<script>
+    const contatoSim = document.getElementById('contato_sim');
+    const contatoNao = document.getElementById('contato_nao');
+    const contatoContainer = document.getElementById('contato_container');
+    const inputsContato = contatoContainer.querySelectorAll('input');
+
+    function atualizarContato() {
+        if (contatoSim.checked) {
+            contatoContainer.style.display = 'block';
+            inputsContato.forEach(i => {
+                i.disabled = false;
+                i.required = true;
+            });
+        } else {
+            contatoContainer.style.display = 'none';
+            inputsContato.forEach(i => {
+                i.value = '';
+                i.required = false;
+                i.disabled = true;
+            });
+        }
+    }
+
+    contatoSim.addEventListener('change', atualizarContato);
+    contatoNao.addEventListener('change', atualizarContato);
+
+    atualizarContato();
+</script>

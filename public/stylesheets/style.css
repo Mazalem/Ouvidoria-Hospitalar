@@ -94,3 +94,18 @@ body {
     font-size: 0.9rem;
     margin-top: auto;
 }
+
+.outro-motivo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.outro-motivo .form-check-input {
+    margin-top: 0;
+}
+
+.outro-motivo input[type="text"] {
+    flex: 1;
+}

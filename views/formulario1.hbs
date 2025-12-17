@@ -1,4 +1,4 @@
-<form action="/formulario/inserir" method="POST">
+<form action="/formulario/inserir" method="POST" id="formParte1">
     <input type="hidden" name="parte" value="1">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
 
@@ -10,7 +10,7 @@
                 <label class="form-label fw-bold">Qual unidade você vai avaliar?</label>
                 <select class="form-select" name="unidade" required>
                     <option value="" selected disabled>Selecione...</option>
-                    <option value="HOSPITAL">Hospital (HDS)</option>
+                    <option value="Hospital">Hospital (HDS)</option>
                     <option value="PAM">Pronto Atendimento Municipal (PAM)</option>
                 </select>
             </div>
@@ -35,14 +35,14 @@
                 </div>
             </div>
 
-            <div id="divino-options">
+            <div id="divino-options" style="display: none;">
                 <div class="mb-3">
                     <label class="form-label">Zona Rural ou Urbana?</label>
                     <div class="btn-group w-100" role="group">
-                        <input type="radio" class="btn-check" name="zona" id="urbana" value="Urbana" required>
+                        <input type="radio" class="btn-check" name="zona" id="urbana" value="Urbana">
                         <label class="btn btn-outline-secondary" for="urbana">Cidade (Urbana)</label>
 
-                        <input type="radio" class="btn-check" name="zona" id="rural" value="Rural" required>
+                        <input type="radio" class="btn-check" name="zona" id="rural" value="Rural">
                         <label class="btn btn-outline-secondary" for="rural">Zona Rural</label>
                     </div>
                 </div>
@@ -89,8 +89,13 @@
         </div>
     </div>
 
-    <div class="d-grid gap-2 mb-5 mt-3">
-        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    <div class="d-grid gap-2 mb-5 mt-3" style="grid-template-columns: 1fr 2fr;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
+            Voltar
+        </button>
+        <button type="submit" class="btn btn-success btn-lg">
+            Próxima
+        </button>
     </div>
 </form>
 
@@ -108,43 +113,42 @@
             bairro.required = true;
             comunidade.disabled = true;
             comunidade.required = false;
-            comunidade.value = "";
         } else if (radioRural.checked) {
             comunidade.disabled = false;
             comunidade.required = true;
             bairro.disabled = true;
             bairro.required = false;
-            bairro.value = "";
+        }
+    }
+
+    function gerenciarDivino() {
+        if (cidadeSelect.value === "Divino") {
+            divinoOptions.style.display = "block";
+            radioUrbana.disabled = false;
+            radioRural.disabled = false;
+            radioUrbana.required = true;
+            radioRural.required = true;
+            atualizarCampos();
+        } else {
+            divinoOptions.style.display = "none";
+            radioUrbana.disabled = true;
+            radioRural.disabled = true;
+            radioUrbana.required = false;
+            radioRural.required = false;
+            bairro.disabled = true;
+            bairro.required = false;
+            comunidade.disabled = true;
+            comunidade.required = false;
         }
     }
 
     radioUrbana.addEventListener('change', atualizarCampos);
     radioRural.addEventListener('change', atualizarCampos);
+    cidadeSelect.addEventListener('change', gerenciarDivino);
 
-    cidadeSelect.addEventListener('change', function() {
-        if (cidadeSelect.value === "Divino") {
-            divinoOptions.style.display = "block";
-            radioUrbana.required = true;
-            radioRural.required = true;
-            bairro.disabled = true;
-            bairro.required = false;
-            comunidade.disabled = true;
-            comunidade.required = false;
-        } else {
-            divinoOptions.style.display = "none";
-            radioUrbana.required = false;
-            radioRural.required = false;
-            radioUrbana.checked = false;
-            radioRural.checked = false;
-            bairro.disabled = true;
-            bairro.required = false;
-            bairro.value = "";
-            comunidade.disabled = true;
-            comunidade.required = false;
-            comunidade.value = "";
-        }
+    window.addEventListener('pageshow', function(event) {
+        gerenciarDivino();
     });
 
-    divinoOptions.style.display = "none";
+    gerenciarDivino();
 </script>
-

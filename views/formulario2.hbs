@@ -10,11 +10,13 @@
                 <label class="form-label fw-bold">Antes de vir ao PAM, você procurou seu PSF?</label>
                 <div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_sim" value="Sim" required>
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_sim" value="Sim"
+                            required>
                         <label class="form-check-label" for="psf_sim">Sim</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_nao" value="Nao" required>
+                        <input class="form-check-input" type="radio" name="procurou_psf" id="psf_nao" value="Nao"
+                            required>
                         <label class="form-check-label" for="psf_nao">Não</label>
                     </div>
                 </div>
@@ -26,6 +28,7 @@
                     <option value="">Selecione...</option>
                     <option value="Rosa Mística">Rosa Mística</option>
                     <option value="Divino">Divino</option>
+                    <option value="Não Sei">Não Sei</option>
                 </select>
             </div>
 
@@ -33,54 +36,108 @@
                 <label class="form-label">Se não foi ao PSF, qual o principal motivo?</label>
 
                 <div id="motivo_nao_psf_container">
+
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Demora no atendimento">
-                        <label class="form-check-label">Demora no atendimento</label>
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]"
+                            value="Não sabia qual era meu PSF" id="motivo_1">
+                        <label class="form-check-label" for="motivo_1">Não sabia qual era meu PSF</label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Unidade fechada">
-                        <label class="form-check-label">Unidade fechada</label>
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]"
+                            value="O PSF estava fechado" id="motivo_2">
+                        <label class="form-check-label" for="motivo_2">O PSF estava fechado</label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Não conseguiu consulta">
-                        <label class="form-check-label">Não conseguiu consulta</label>
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]"
+                            value="Preferi vir direto ao PAM" id="motivo_3">
+                        <label class="form-check-label" for="motivo_3">Preferi vir direto ao PAM</label>
                     </div>
 
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Preferiu vir direto ao PAM">
-                        <label class="form-check-label">Preferiu vir direto ao PAM</label>
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]"
+                            value="Não consegui atendimento no PSF" id="motivo_4">
+                        <label class="form-check-label" for="motivo_4">Não consegui atendimento no PSF</label>
                     </div>
+
+                    <div class="outro-motivo">
+                        <input class="form-check-input" type="checkbox" name="motivo_nao_psf[]" value="Outro"
+                            id="motivo_outro">
+                        <label class="form-check-label" for="motivo_outro">Outro motivo:</label>
+
+                        <input type="text" class="form-control" name="motivo_nao_psf_outro" placeholder="Especifique"
+                            id="motivo_outro_input">
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="d-grid gap-2 mb-5 mt-3">
-        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    <div class="d-grid gap-2 mb-5 mt-3" style="grid-template-columns: 1fr 2fr;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
+            Voltar
+        </button>
+        <button type="submit" class="btn btn-success btn-lg">
+            Próxima
+        </button>
     </div>
 </form>
 
 <script>
+    const form = document.querySelector('form');
     const psfSim = document.getElementById('psf_sim');
     const psfNao = document.getElementById('psf_nao');
+    const motivoSection = document.querySelector('#motivo_nao_psf_container').parentElement;
     const motivoContainer = document.getElementById('motivo_nao_psf_container');
     const checkboxes = motivoContainer.querySelectorAll('input[type="checkbox"]');
+    const outroCheckbox = motivoContainer.querySelector('input[type="checkbox"][value="Outro"]');
+    const outroInput = motivoContainer.querySelector('input[name="motivo_nao_psf_outro"]');
 
-    function atualizarCampos() {
+    function atualizarVisibilidadeMotivos() {
         if (psfNao.checked) {
-            checkboxes.forEach(c => c.disabled = false);
-        } else if (psfSim.checked) {
-            checkboxes.forEach(c => {
-                c.checked = false;
-                c.disabled = true;
-            });
+            motivoSection.style.display = 'block';
+        } else {
+            motivoSection.style.display = 'none';
+            checkboxes.forEach(c => c.checked = false);
+            outroInput.value = '';
+            outroInput.disabled = true;
+            outroInput.removeAttribute('required');
         }
     }
 
-    atualizarCampos();
+    function atualizarOutroMotivo() {
+        if (outroCheckbox.checked) {
+            outroInput.disabled = false;
+            outroInput.setAttribute('required', 'required');
+        } else {
+            outroInput.value = '';
+            outroInput.disabled = true;
+            outroInput.removeAttribute('required');
+        }
+    }
 
-    psfSim.addEventListener('change', atualizarCampos);
-    psfNao.addEventListener('change', atualizarCampos);
+    form.addEventListener('submit', function () {
+        if (outroCheckbox.checked) {
+            outroCheckbox.checked = false;
+            const textoOutro = outroInput.value.trim();
+            if (textoOutro !== '') {
+                const hidden = document.createElement('input');
+                hidden.type = 'hidden';
+                hidden.name = 'motivo_nao_psf[]';
+                hidden.value = textoOutro;
+                form.appendChild(hidden);
+            }
+        }
+        outroInput.disabled = true;
+    });
+
+    psfSim.addEventListener('change', atualizarVisibilidadeMotivos);
+    psfNao.addEventListener('change', atualizarVisibilidadeMotivos);
+    outroCheckbox.addEventListener('change', atualizarOutroMotivo);
+
+    atualizarVisibilidadeMotivos();
+    atualizarOutroMotivo();
+
 </script>

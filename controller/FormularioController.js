@@ -14,14 +14,14 @@ exports.inserirFormulario = async (req, res) => {
         const formulario = req.body;
         let idFormulario = null;
         let parte = formulario.parte;
-        if (parte !== '1' && parte !== '8') {
+        if (parte !== '1' && parte !== '9') {
             idFormulario = formulario.idFormulario;
             await FormulariosMongo.acrescentar(idFormulario, formulario);
         }
         else {
             idFormulario = await FormulariosMongo.inserir(formulario);
         }
-        if (Number.parseInt(parte) + 1 === 7) {
+        if (Number.parseInt(parte) + 1 === 8) {
             const formularioCompleto = await FormulariosMongo.buscarPorId(idFormulario);
             if (formularioCompleto) {
                 delete formularioCompleto.parte;

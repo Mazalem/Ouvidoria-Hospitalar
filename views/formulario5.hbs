@@ -2,55 +2,115 @@
     <input type="hidden" name="parte" value="5">
     <input type="hidden" name="idFormulario" value="{{idFormulario}}">
 
-    <div class="card border-primary">
-        <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Avaliação Geral (NPS)</h5>
-        </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="section-title">5. Direitos do Usuário</h5>
 
-        <div class="card-body text-center">
-            <p class="lead">Qual a chance de você indicar os serviços do PAM/Hospital para um amigo ou familiar?</p>
-            <p class="small text-muted">0 = Nada provável | 10 = Extremamente provável</p>
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                    Você sabe onde reclamar caso seja mal atendido?
+                </label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sabe_reclamar"
+                            id="reclamar_sim" value="Sim" required>
+                        <label class="form-check-label" for="reclamar_sim">Sim</label>
+                    </div>
 
-            <div class="btn-group w-100 d-flex flex-wrap" role="group">
-
-                <input type="radio" class="btn-check" name="nps" id="nps0" value="0" required>
-                <label class="btn btn-outline-danger" for="nps0">0</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps1" value="1">
-                <label class="btn btn-outline-danger" for="nps1">1</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps2" value="2">
-                <label class="btn btn-outline-danger" for="nps2">2</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps3" value="3">
-                <label class="btn btn-outline-warning" for="nps3">3</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps4" value="4">
-                <label class="btn btn-outline-warning" for="nps4">4</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps5" value="5">
-                <label class="btn btn-outline-warning" for="nps5">5</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps6" value="6">
-                <label class="btn btn-outline-info" for="nps6">6</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps7" value="7">
-                <label class="btn btn-outline-info" for="nps7">7</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps8" value="8">
-                <label class="btn btn-outline-primary" for="nps8">8</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps9" value="9">
-                <label class="btn btn-outline-success" for="nps9">9</label>
-
-                <input type="radio" class="btn-check" name="nps" id="nps10" value="10">
-                <label class="btn btn-outline-success" for="nps10">10</label>
-
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="sabe_reclamar"
+                            id="reclamar_nao" value="Nao" required>
+                        <label class="form-check-label" for="reclamar_nao">Não</label>
+                    </div>
+                </div>
             </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                    Você pagou algum valor durante o atendimento?
+                </label>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pagou_valor"
+                            id="pagou_sim" value="Sim" required>
+                        <label class="form-check-label" for="pagou_sim">Sim</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="pagou_valor"
+                            id="pagou_nao" value="Nao" required>
+                        <label class="form-check-label" for="pagou_nao">Não</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3" id="pagamento_container">
+                <label class="form-label">
+                    Se sim, o quê?
+                </label>
+                <input type="number" min="0" step="0.01" class="form-control"
+                    name="descricao_pagamento"
+                    placeholder="Escreva o valor"
+                    id="descricao_pagamento">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">
+                    Você sabe o nome do profissional que o atendeu?
+                </label>
+                <div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="nome_profissional"
+                            id="prof_sim" value="Sim" required>
+                        <label class="form-check-label" for="prof_sim">Sim</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="nome_profissional"
+                            id="prof_nao" value="Nao" required>
+                        <label class="form-check-label" for="prof_nao">Não</label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="nome_profissional"
+                            id="prof_nao_lembro" value="Nao lembro" required>
+                        <label class="form-check-label" for="prof_nao_lembro">Não lembro</label>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div class="d-grid gap-2 mb-5 mt-3">
-        <button type="submit" class="btn btn-success btn-lg">Próxima</button>
+    <div class="d-grid gap-2 mb-5 mt-3" style="grid-template-columns: 1fr 2fr;">
+        <button type="button" class="btn btn-primary btn-lg" onclick="history.back()">
+            Voltar
+        </button>
+        <button type="submit" class="btn btn-success btn-lg">
+            Próxima
+        </button>
     </div>
 </form>
+
+<script>
+    const pagouSim = document.getElementById('pagou_sim');
+    const pagouNao = document.getElementById('pagou_nao');
+    const pagamentoContainer = document.getElementById('pagamento_container');
+    const descricaoPagamento = document.getElementById('descricao_pagamento');
+
+    function atualizarPagamento() {
+        if (pagouSim.checked) {
+            pagamentoContainer.style.display = 'block';
+            descricaoPagamento.setAttribute('required', 'required');
+        } else {
+            pagamentoContainer.style.display = 'none';
+            descricaoPagamento.value = '';
+            descricaoPagamento.removeAttribute('required');
+        }
+    }
+
+    pagouSim.addEventListener('change', atualizarPagamento);
+    pagouNao.addEventListener('change', atualizarPagamento);
+
+    atualizarPagamento();
+</script>
