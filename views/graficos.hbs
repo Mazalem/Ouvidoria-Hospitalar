@@ -13,12 +13,15 @@
                 <div class="col-md-9">
                     <h5 class="fw-bold">Net Promoter Score (Lealdade)</h5>
                     <p class="small text-muted">
-                        Calculado pela diferença entre o % de **Promotores** (notas 9-10) e o % de **Detratores** (notas 0-6). 
+                        Calculado pela diferença entre o % de **Promotores** (notas 9-10) e o % de **Detratores** (notas
+                        0-6).
                         As notas 7-8 são neutras. Indica o potencial de recomendação da unidade.
                     </p>
                     <div class="progress mb-2" style="height: 30px;">
-                        <div class="progress-bar bg-success" style="width: {{stats.promotores}}%">{{stats.promotores}}% Promotores</div>
-                        <div class="progress-bar bg-danger" style="width: {{stats.detratores}}%">{{stats.detratores}}% Detratores</div>
+                        <div class="progress-bar bg-success" style="width: {{stats.promotores}}%">{{stats.promotores}}%
+                            Promotores</div>
+                        <div class="progress-bar bg-danger" style="width: {{stats.detratores}}%">{{stats.detratores}}%
+                            Detratores</div>
                     </div>
                 </div>
             </div>
@@ -27,47 +30,172 @@
 
     <h4 class="section-title-dash text-primary">1. Perfil e Localização</h4>
     <div class="row g-3">
-        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Unidade Avaliada</h6><div class="chart-container"><canvas id="cUnidade"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Cidade que Reside</h6><div class="chart-container"><canvas id="cCidade"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Perfil do Usuário</h6><div class="chart-container"><canvas id="cPerfil"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Sexo</h6><div class="chart-container"><canvas id="cSexo"></canvas></div></div></div>
-        <div class="col-md-8"><div class="card p-3 shadow-sm"><h6>Renda Familiar</h6><div class="chart-container"><canvas id="cRenda"></canvas></div></div></div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Unidade Avaliada</h6>
+                <div class="chart-container"><canvas id="cUnidade"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Cidade que Reside</h6>
+                <div class="chart-container"><canvas id="cCidade"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Perfil do Usuário</h6>
+                <div class="chart-container"><canvas id="cPerfil"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Sexo</h6>
+                <div class="chart-container"><canvas id="cSexo"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card p-3 shadow-sm">
+                <h6>Renda Familiar</h6>
+                <div class="chart-container"><canvas id="cRenda"></canvas></div>
+            </div>
+        </div>
     </div>
 
     <h4 class="section-title-dash text-primary">2. Atenção Primária (PSF)</h4>
     <div class="row g-3">
-        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Procurou PSF antes?</h6><div class="chart-container"><canvas id="cProcPSF"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Posto de Referência</h6><div class="chart-container"><canvas id="cNomePSF"></canvas></div></div></div>
-        <div class="col-md-5"><div class="card p-3 shadow-sm"><h6>Motivos para não ir ao PSF</h6><div class="chart-container"><canvas id="cMotivPSF"></canvas></div></div></div>
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <h6>Procurou PSF antes?</h6>
+                <div class="chart-container"><canvas id="cProcPSF"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Posto de Referência</h6>
+                <div class="chart-container"><canvas id="cNomePSF"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card p-3 shadow-sm">
+                <h6>Motivos para não ir ao PSF</h6>
+                <div class="chart-container"><canvas id="cMotivPSF"></canvas></div>
+            </div>
+        </div>
     </div>
 
     <h4 class="section-title-dash text-primary">3. Avaliação do Atendimento (1 a 5)</h4>
     <div class="row g-3">
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Tempo Espera</h6><div class="chart-container"><canvas id="cTempo"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Agilidade Profis.</h6><div class="chart-container"><canvas id="cAgilidade"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Higiene Ambientes</h6><div class="chart-container"><canvas id="cLimpeza"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Sinalização</h6><div class="chart-container"><canvas id="cSinal"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Atend. Recepção</h6><div class="chart-container"><canvas id="cRecepcao"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Atend. Equipe</h6><div class="chart-container"><canvas id="cEquipe"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Segurança</h6><div class="chart-container"><canvas id="cSeguranca"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Informações</h6><div class="chart-container"><canvas id="cInfo"></canvas></div></div></div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Tempo Espera</h6>
+                <div class="chart-container"><canvas id="cTempo"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Agilidade Profis.</h6>
+                <div class="chart-container"><canvas id="cAgilidade"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Higiene Ambientes</h6>
+                <div class="chart-container"><canvas id="cLimpeza"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Sinalização</h6>
+                <div class="chart-container"><canvas id="cSinal"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Atend. Recepção</h6>
+                <div class="chart-container"><canvas id="cRecepcao"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Atend. Equipe</h6>
+                <div class="chart-container"><canvas id="cEquipe"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Segurança</h6>
+                <div class="chart-container"><canvas id="cSeguranca"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-2 shadow-sm text-center">
+                <h6>Informações</h6>
+                <div class="chart-container"><canvas id="cInfo"></canvas></div>
+            </div>
+        </div>
     </div>
 
     <h4 class="section-title-dash text-primary">4. Direitos e Distribuição NPS</h4>
     <div class="row g-3">
-        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Sabe reclamar?</h6><div class="chart-container"><canvas id="cReclamar"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Pagou Valor?</h6><div class="chart-container"><canvas id="cPagou"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Sabe Nome Prof?</h6><div class="chart-container"><canvas id="cNomeProf"></canvas></div></div></div>
-        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Notas 0-10 (NPS)</h6><div class="chart-container"><canvas id="cNPSDist"></canvas></div></div></div>
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <h6>Sabe reclamar?</h6>
+                <div class="chart-container"><canvas id="cReclamar"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <h6>Pagou Valor?</h6>
+                <div class="chart-container"><canvas id="cPagou"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <h6>Sabe Nome Prof?</h6>
+                <div class="chart-container"><canvas id="cNomeProf"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <h6>Notas 0-10 (NPS)</h6>
+                <div class="chart-container"><canvas id="cNPSDist"></canvas></div>
+            </div>
+        </div>
     </div>
 
     <h4 class="section-title-dash text-primary">5. Internamento</h4>
     <div class="row g-3">
-        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Ficou Internado?</h6><div class="chart-container"><canvas id="cInternado"></canvas></div></div></div>
-        <div class="col-md-8"><div class="card p-3 shadow-sm"><h6>Quantidade de Dias</h6><div class="chart-container"><canvas id="cDias"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm text-center"><h6>Limpeza Roupas</h6><div class="chart-container"><canvas id="cRoupas"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm text-center"><h6>Alimentação</h6><div class="chart-container"><canvas id="cAlimenta"></canvas></div></div></div>
-        <div class="col-md-4"><div class="card p-3 shadow-sm text-center"><h6>Visitas</h6><div class="chart-container"><canvas id="cVisitas"></canvas></div></div></div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm">
+                <h6>Ficou Internado?</h6>
+                <div class="chart-container"><canvas id="cInternado"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card p-3 shadow-sm">
+                <h6>Quantidade de Dias</h6>
+                <div class="chart-container"><canvas id="cDias"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm text-center">
+                <h6>Limpeza Roupas</h6>
+                <div class="chart-container"><canvas id="cRoupas"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm text-center">
+                <h6>Alimentação</h6>
+                <div class="chart-container"><canvas id="cAlimenta"></canvas></div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-3 shadow-sm text-center">
+                <h6>Visitas</h6>
+                <div class="chart-container"><canvas id="cVisitas"></canvas></div>
+            </div>
+        </div>
     </div>
 
     <div class="text-center mt-5 mb-5"><a href="/" class="btn btn-outline-primary btn-lg px-5">Voltar</a></div>
@@ -75,15 +203,40 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const scaleColors = ['#dc3545', '#fd7e14', '#ffc107', '#0dcaf0', '#198754'];
-    const stdColors = ['#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#fd7e14', '#ffc107', '#198754'];
+    const coresHDS = {
+        laranja: 'rgb(242, 101, 34)',     // [cite: 30]
+        azul: 'rgb(9, 43, 73)',          // [cite: 33]
+        verde: 'rgb(22, 186, 173)',      // [cite: 81]
+        celeste: 'rgb(4, 159, 218)',     // [cite: 83]
+        azulMedio: 'rgba(9, 43, 73, 0.7)',
+        laranjaMedio: 'rgba(242, 101, 34, 0.7)'
+    };
+
+    // Cores para Escalas de 1 a 5 (isScale)
+    const scaleColors = [
+        coresHDS.laranja, 
+        coresHDS.celeste, 
+        coresHDS.verde, 
+        coresHDS.azulMedio, 
+        coresHDS.azul
+    ];
+
+    // Cores padrão para gráficos de pizza/donuts
+    const stdColors = [
+        coresHDS.azul, 
+        coresHDS.laranja, 
+        coresHDS.celeste, 
+        coresHDS.verde, 
+        '#5C7893', // Variação do azul
+        '#F7941D'  // Variação do laranja
+    ];
 
     function create(id, type, labels, data, isScale = false) {
         new Chart(document.getElementById(id), {
             type: type,
             data: { labels: labels, datasets: [{ data: data, backgroundColor: isScale ? scaleColors : stdColors }] },
-            options: { 
-                plugins: { legend: { display: type !== 'bar', position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }, 
+            options: {
+                plugins: { legend: { display: type !== 'bar', position: 'bottom', labels: { boxWidth: 10, font: { size: 10, family: 'Poppins' } } } },
                 responsive: true,
                 maintainAspectRatio: false
             }
@@ -91,37 +244,38 @@
     }
 
     // Parte 1 & 3
-    const dUn = {{{dados.unidade}}}; create('cUnidade', 'pie', Object.keys(dUn), Object.values(dUn));
-    const dCi = {{{dados.cidade}}}; create('cCidade', 'polarArea', Object.keys(dCi), Object.values(dCi));
-    const dPe = {{{dados.perfil}}}; create('cPerfil', 'doughnut', Object.keys(dPe), Object.values(dPe));
-    const dSx = {{{dados.sexo}}}; create('cSexo', 'pie', Object.keys(dSx), Object.values(dSx));
-    const dRe = {{{dados.renda}}}; create('cRenda', 'pie', Object.keys(dRe), Object.values(dRe));
+    const dUn = {{{ dados.unidade }}}; create('cUnidade', 'pie', Object.keys(dUn), Object.values(dUn));
+    const dCi = {{{ dados.cidade }}}; create('cCidade', 'polarArea', Object.keys(dCi), Object.values(dCi));
+    const dPe = {{{ dados.perfil }}}; create('cPerfil', 'doughnut', Object.keys(dPe), Object.values(dPe));
+    const dSx = {{{ dados.sexo }}}; create('cSexo', 'pie', Object.keys(dSx), Object.values(dSx));
+    const dRe = {{{ dados.renda }}}; create('cRenda', 'pie', Object.keys(dRe), Object.values(dRe));
 
     // Parte 2
-    const dPr = {{{dados.procurou_psf}}}; create('cProcPSF', 'pie', Object.keys(dPr), Object.values(dPr));
-    const dNpsf = {{{dados.nome_psf}}}; create('cNomePSF', 'bar', Object.keys(dNpsf), Object.values(dNpsf));
-    const dMpsf = {{{dados.motivo_psf}}}; create('cMotivPSF', 'bar', Object.keys(dMpsf), Object.values(dMpsf));
+    const dPr = {{{ dados.procurou_psf }}}; create('cProcPSF', 'pie', Object.keys(dPr), Object.values(dPr));
+    const dNpsf = {{{ dados.nome_psf }}}; create('cNomePSF', 'bar', Object.keys(dNpsf), Object.values(dNpsf));
+    const dMpsf = {{{ dados.motivo_psf }}}; create('cMotivPSF', 'bar', Object.keys(dMpsf), Object.values(dMpsf));
 
     // Parte 4 (Escalas)
-    const dTe = {{{dados.tempo}}}; create('cTempo', 'bar', dTe.labels, dTe.data, true);
-    const dAg = {{{dados.agilidade}}}; create('cAgilidade', 'bar', dAg.labels, dAg.data, true);
-    const dLi = {{{dados.limpeza}}}; create('cLimpeza', 'bar', dLi.labels, dLi.data, true);
-    const dSi = {{{dados.sinalizacao}}}; create('cSinal', 'bar', dSi.labels, dSi.data, true);
-    const dRc = {{{dados.recepcao}}}; create('cRecepcao', 'bar', dRc.labels, dRc.data, true);
-    const dEq = {{{dados.equipe}}}; create('cEquipe', 'bar', dEq.labels, dEq.data, true);
-    const dSg = {{{dados.seguranca}}}; create('cSeguranca', 'bar', dSg.labels, dSg.data, true);
-    const dIf = {{{dados.informacoes}}}; create('cInfo', 'bar', dIf.labels, dIf.data, true);
+    const dTe = {{{ dados.tempo }}}; create('cTempo', 'bar', dTe.labels, dTe.data, true);
+    const dAg = {{{ dados.agilidade }}}; create('cAgilidade', 'bar', dAg.labels, dAg.data, true);
+    const dLi = {{{ dados.limpeza }}}; create('cLimpeza', 'bar', dLi.labels, dLi.data, true);
+    const dSi = {{{ dados.sinalizacao }}}; create('cSinal', 'bar', dSi.labels, dSi.data, true);
+    const dRc = {{{ dados.recepcao }}}; create('cRecepcao', 'bar', dRc.labels, dRc.data, true);
+    const dEq = {{{ dados.equipe }}}; create('cEquipe', 'bar', dEq.labels, dEq.data, true);
+    const dSg = {{{ dados.seguranca }}}; create('cSeguranca', 'bar', dSg.labels, dSg.data, true);
+    const dIf = {{{ dados.informacoes }}}; create('cInfo', 'bar', dIf.labels, dIf.data, true);
 
     // Parte 5 & NPS
-    const dRec = {{{dados.reclamar}}}; create('cReclamar', 'pie', Object.keys(dRec), Object.values(dRec));
-    const dPag = {{{dados.pagou}}}; create('cPagou', 'pie', Object.keys(dPag), Object.values(dPag));
-    const dPrf = {{{dados.profissional}}}; create('cNomeProf', 'pie', Object.keys(dPrf), Object.values(dPrf));
-    const dNd = {{{dados.nps_dist}}}; create('cNPSDist', 'bar', dNd.labels, dNd.data);
+    const dRec = {{{ dados.reclamar }}}; create('cReclamar', 'pie', Object.keys(dRec), Object.values(dRec));
+    const dPag = {{{ dados.pagou }}}; create('cPagou', 'pie', Object.keys(dPag), Object.values(dPag));
+    const dPrf = {{{ dados.profissional }}}; create('cNomeProf', 'pie', Object.keys(dPrf), Object.values(dPrf));
+    const dNd = {{{ dados.nps_dist }}}; create('cNPSDist', 'bar', dNd.labels, dNd.data);
 
     // Parte 6
-    const dIt = {{{dados.internado}}}; create('cInternado', 'pie', Object.keys(dIt), Object.values(dIt));
-    const dDi = {{{dados.dias}}}; create('cDias', 'bar', Object.keys(dDi), Object.values(dDi));
-    const dRo = {{{dados.roupas}}}; create('cRoupas', 'bar', dRo.labels, dRo.data, true);
-    const dAl = {{{dados.alimentacao}}}; create('cAlimenta', 'bar', dAl.labels, dAl.data, true);
-    const dVi = {{{dados.visitas}}}; create('cVisitas', 'bar', dVi.labels, dVi.data, true);
+    const dIt = {{{ dados.internado }}}; create('cInternado', 'pie', Object.keys(dIt), Object.values(dIt));
+    const dDi = {{{ dados.dias }}}; create('cDias', 'bar', Object.keys(dDi), Object.values(dDi));
+    const dRo = {{{ dados.roupas }}}; create('cRoupas', 'bar', dRo.labels, dRo.data, true);
+    const dAl = {{{ dados.alimentacao }}}; create('cAlimenta', 'bar', dAl.labels, dAl.data, true);
+    const dVi = {{{ dados.visitas }}}; create('cVisitas', 'bar', dVi.labels, dVi.data, true);
+
 </script>

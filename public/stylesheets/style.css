@@ -6,6 +6,7 @@
 
     --bg-color: #F8F9FA;
     --text-color: var(--hds-prussian-blue);
+    --azul-medio: #007AA7;
 }
 
 
@@ -141,6 +142,8 @@ body {
     margin-top: 40px;
     margin-bottom: 25px;
     font-weight: bold;
+}
+
 .login-container {
     min-height: 80vh;
     display: flex;
@@ -180,4 +183,9 @@ body {
 .btn-respond:hover {
     transform: scale(1.05);
     color: white;
+}
+
+.login-admin-card {
+    max-width: 450px; 
+    width: 100%;
 }

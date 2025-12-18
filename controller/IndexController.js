@@ -13,3 +13,7 @@ exports.registro = async function(req, res){
 exports.agradecimento = async function(req, res){
     res.render('agradecimento', { title: 'Home' });
 }
+
+exports.consentimento = async function(req, res){
+    res.render('consentimento', { title: 'Home' });
+}
