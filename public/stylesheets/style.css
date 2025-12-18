@@ -1,17 +1,17 @@
 :root {
-    --laranja: rgb(242, 101, 34);
-    --azul: rgb(9, 43, 73);
-    --azul-claro: rgb(4, 159, 218);
-    --primary-dark: rgb(9, 43, 73);
-    --bg-color: #f0f2f5;
-    --text-color: #343a40;
-    --card-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    --hds-orange: rgb(242, 101, 34);
+    --hds-prussian-blue: rgb(9, 43, 73);
+    --hds-sea-green: rgb(22, 186, 173);
+    --hds-celestial-blue: rgb(4, 159, 218);
+
+    --bg-color: #F8F9FA;
+    --text-color: var(--hds-prussian-blue);
 }
 
 
 body {
     background-color: var(--bg-color);
-    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: var(--text-color);
     min-height: 100vh;
     display: flex;
@@ -22,8 +22,8 @@ body {
 
 
 .navbar-custom {
-    background: linear-gradient(135deg, var(--azul) 0%, var(--primary-dark) 100%);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background: var(--hds-prussian-blue);
+    border-bottom: 4px solid var(--hds-orange);
     padding: 1rem 0;
     margin-bottom: 20px;
 }
@@ -38,6 +38,10 @@ body {
     gap: 10px;
 }
 
+.section-title {
+    color: var(--hds-prussian-blue);
+    border-left: 6px solid var(--hds-orange);
+}
 
 .main-container {
     flex: 1;
@@ -71,20 +75,34 @@ body {
 }
 
 
-.btn-primary {
-    background-color: var(--azul-claro) !important;
-    padding: 10px 24px;
+.btn-success {
+    background-color: var(--hds-orange) !important;
+    border: none;
     font-weight: 600;
-    transition: .3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-
-.btn-primary:hover {
-    background-color: var(--laranja) !important;
-    ;
+.btn-success:hover {
+    background-color: #d1561d !important;
     transform: translateY(-2px);
 }
 
+/* Botão de Voltar */
+.btn-primary {
+    background-color: transparent !important;
+    border: 2px solid var(--hds-prussian-blue) !important;
+    color: var(--hds-prussian-blue) !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--hds-prussian-blue) !important;
+    color: white !important;
+}
+
+.card {
+    border-top: 5px solid var(--hds-celestial-blue);
+}
 
 .footer {
     background-color: white;
@@ -123,4 +141,43 @@ body {
     margin-top: 40px;
     margin-bottom: 25px;
     font-weight: bold;
+.login-container {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Lado Esquerdo - Administrador */
+.admin-section {
+    border-right: 2px solid #dee2e6;
+    padding: 2rem;
+}
+
+/* Lado Direito - Usuário/Paciente */
+.user-section {
+    padding: 2rem;
+    text-align: center;
+}
+
+.btn-admin {
+    background-color: var(--hds-blue) !important;
+    color: white;
+    font-weight: 600;
+}
+
+.btn-respond {
+    background-color: var(--hds-orange) !important; /* Cor de ação  */
+    color: white;
+    font-weight: 700;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.btn-respond:hover {
+    transform: scale(1.05);
+    color: white;
 }
