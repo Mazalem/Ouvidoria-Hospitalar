@@ -1,4 +1,5 @@
 const FormulariosMongo = require("../model/FormularioMongo");
+const UsuarioMongo = require("../model/UsuarioMongo");
 
 exports.listarFormularios = async (req, res) => {
     try {
@@ -38,6 +39,17 @@ exports.inserirFormulario = async (req, res) => {
 
 exports.exibirGraficos = async (req, res) => {
     try {
+        const usuario = req.body;
+        const usuarioEncontrado = await UsuarioMongo.login(usuario);
+        
+        if (!usuarioEncontrado) {
+            return res.render("login", { 
+                erro: "E-mail ou senha incorretos.",
+                emailDigitado: usuario.email,
+                title: 'Login'
+            });
+        }
+        
         await FormulariosMongo.removerRespostasIncompletas();
         await FormulariosMongo.apararRespostas();
 
@@ -102,13 +114,13 @@ exports.exibirGraficos = async (req, res) => {
 
         res.render("graficos", {
             title: 'Dashboard HDS/PAM',
-            stats: { 
-                total: formularios.length, 
-                nps: npsFinal, 
-                npsColor, 
-                promotores: Math.round((promotores/totalNPS)*100 || 0),
-                detratores: Math.round((detratores/totalNPS)*100 || 0),
-                pacientes: formularios.filter(f => f.perfil_usuario === 'Paciente').length 
+            stats: {
+                total: formularios.length,
+                nps: npsFinal,
+                npsColor,
+                promotores: Math.round((promotores / totalNPS) * 100 || 0),
+                detratores: Math.round((detratores / totalNPS) * 100 || 0),
+                pacientes: formularios.filter(f => f.perfil_usuario === 'Paciente').length
             },
             dados: {
                 unidade: JSON.stringify(contar("unidade")),
