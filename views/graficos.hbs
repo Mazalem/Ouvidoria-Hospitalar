@@ -1,72 +1,127 @@
-<h2 class="section-title mb-4">Gráficos das Avaliações</h2>
+<div class="container-fluid pb-5">
+    <h2 class="text-center fw-bold mb-5 mt-4">Painel Executivo de Indicadores</h2>
 
-<div class="card mb-4">
-    <div class="card-body">
-
-        <div class="row g-4">
-            <!-- GRÁFICO 1 -->
-            <div class="col-md-4 col-sm-12">
-                <div class="text-center">
-                    <h5 class="fw-bold mb-3">Avaliação da Equipe</h5>
-                    <canvas id="graficoEquipe"></canvas>
+    <div class="card shadow-sm mb-5">
+        <div class="card-body bg-light">
+            <div class="row align-items-center">
+                <div class="col-md-3 text-center">
+                    <div class="p-4 rounded shadow-sm {{stats.npsColor}} text-white">
+                        <h6 class="text-uppercase small opacity-75">Índice NPS</h6>
+                        <h1 class="display-3 fw-bold mb-0">{{stats.nps}}</h1>
+                    </div>
                 </div>
-            </div>
-
-            <!-- GRÁFICO 2 -->
-            <div class="col-md-4 col-sm-12">
-                <div class="text-center">
-                    <h5 class="fw-bold mb-3">Limpeza</h5>
-                    <canvas id="graficoLimpeza"></canvas>
-                </div>
-            </div>
-
-            <!-- GRÁFICO 3 -->
-            <div class="col-md-4 col-sm-12">
-                <div class="text-center">
-                    <h5 class="fw-bold mb-3">Tempo de Espera</h5>
-                    <canvas id="graficoTempo"></canvas>
+                <div class="col-md-9">
+                    <h5 class="fw-bold">Net Promoter Score (Lealdade)</h5>
+                    <p class="small text-muted">
+                        Calculado pela diferença entre o % de **Promotores** (notas 9-10) e o % de **Detratores** (notas 0-6). 
+                        As notas 7-8 são neutras. Indica o potencial de recomendação da unidade.
+                    </p>
+                    <div class="progress mb-2" style="height: 30px;">
+                        <div class="progress-bar bg-success" style="width: {{stats.promotores}}%">{{stats.promotores}}% Promotores</div>
+                        <div class="progress-bar bg-danger" style="width: {{stats.detratores}}%">{{stats.detratores}}% Detratores</div>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-</div>
 
-<div class="d-grid gap-2 mb-5 mt-3">
-    <a href="/" class="btn btn-secondary btn-lg">Voltar</a>
+    <h4 class="section-title-dash text-primary">1. Perfil e Localização</h4>
+    <div class="row g-3">
+        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Unidade Avaliada</h6><div class="chart-container"><canvas id="cUnidade"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Cidade que Reside</h6><div class="chart-container"><canvas id="cCidade"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Perfil do Usuário</h6><div class="chart-container"><canvas id="cPerfil"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Sexo</h6><div class="chart-container"><canvas id="cSexo"></canvas></div></div></div>
+        <div class="col-md-8"><div class="card p-3 shadow-sm"><h6>Renda Familiar</h6><div class="chart-container"><canvas id="cRenda"></canvas></div></div></div>
+    </div>
+
+    <h4 class="section-title-dash text-primary">2. Atenção Primária (PSF)</h4>
+    <div class="row g-3">
+        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Procurou PSF antes?</h6><div class="chart-container"><canvas id="cProcPSF"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Posto de Referência</h6><div class="chart-container"><canvas id="cNomePSF"></canvas></div></div></div>
+        <div class="col-md-5"><div class="card p-3 shadow-sm"><h6>Motivos para não ir ao PSF</h6><div class="chart-container"><canvas id="cMotivPSF"></canvas></div></div></div>
+    </div>
+
+    <h4 class="section-title-dash text-primary">3. Avaliação do Atendimento (1 a 5)</h4>
+    <div class="row g-3">
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Tempo Espera</h6><div class="chart-container"><canvas id="cTempo"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Agilidade Profis.</h6><div class="chart-container"><canvas id="cAgilidade"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Higiene Ambientes</h6><div class="chart-container"><canvas id="cLimpeza"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Sinalização</h6><div class="chart-container"><canvas id="cSinal"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Atend. Recepção</h6><div class="chart-container"><canvas id="cRecepcao"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Atend. Equipe</h6><div class="chart-container"><canvas id="cEquipe"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Segurança</h6><div class="chart-container"><canvas id="cSeguranca"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-2 shadow-sm text-center"><h6>Informações</h6><div class="chart-container"><canvas id="cInfo"></canvas></div></div></div>
+    </div>
+
+    <h4 class="section-title-dash text-primary">4. Direitos e Distribuição NPS</h4>
+    <div class="row g-3">
+        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Sabe reclamar?</h6><div class="chart-container"><canvas id="cReclamar"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Pagou Valor?</h6><div class="chart-container"><canvas id="cPagou"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Sabe Nome Prof?</h6><div class="chart-container"><canvas id="cNomeProf"></canvas></div></div></div>
+        <div class="col-md-3"><div class="card p-3 shadow-sm"><h6>Notas 0-10 (NPS)</h6><div class="chart-container"><canvas id="cNPSDist"></canvas></div></div></div>
+    </div>
+
+    <h4 class="section-title-dash text-primary">5. Internamento</h4>
+    <div class="row g-3">
+        <div class="col-md-4"><div class="card p-3 shadow-sm"><h6>Ficou Internado?</h6><div class="chart-container"><canvas id="cInternado"></canvas></div></div></div>
+        <div class="col-md-8"><div class="card p-3 shadow-sm"><h6>Quantidade de Dias</h6><div class="chart-container"><canvas id="cDias"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm text-center"><h6>Limpeza Roupas</h6><div class="chart-container"><canvas id="cRoupas"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm text-center"><h6>Alimentação</h6><div class="chart-container"><canvas id="cAlimenta"></canvas></div></div></div>
+        <div class="col-md-4"><div class="card p-3 shadow-sm text-center"><h6>Visitas</h6><div class="chart-container"><canvas id="cVisitas"></canvas></div></div></div>
+    </div>
+
+    <div class="text-center mt-5 mb-5"><a href="/" class="btn btn-outline-primary btn-lg px-5">Voltar</a></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
-    const equipe = {{{equipe}}};
-    const limpeza = {{{limpeza}}};
-    const tempo = {{{tempo}}};
+    const scaleColors = ['#dc3545', '#fd7e14', '#ffc107', '#0dcaf0', '#198754'];
+    const stdColors = ['#0d6efd', '#6610f2', '#6f42c1', '#d63384', '#fd7e14', '#ffc107', '#198754'];
 
-    function gerarGrafico(id, dados) {
+    function create(id, type, labels, data, isScale = false) {
         new Chart(document.getElementById(id), {
-            type: "pie",
-            data: {
-                labels: Object.keys(dados),
-                datasets: [
-                    {
-                        data: Object.values(dados),
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
+            type: type,
+            data: { labels: labels, datasets: [{ data: data, backgroundColor: isScale ? scaleColors : stdColors }] },
+            options: { 
+                plugins: { legend: { display: type !== 'bar', position: 'bottom', labels: { boxWidth: 10, font: { size: 10 } } } }, 
                 responsive: true,
-                plugins: {
-                    legend: {
-                        position: "bottom"
-                    }
-                }
+                maintainAspectRatio: false
             }
         });
     }
 
-    gerarGrafico("graficoEquipe", equipe);
-    gerarGrafico("graficoLimpeza", limpeza);
-    gerarGrafico("graficoTempo", tempo);
+    // Parte 1 & 3
+    const dUn = {{{dados.unidade}}}; create('cUnidade', 'pie', Object.keys(dUn), Object.values(dUn));
+    const dCi = {{{dados.cidade}}}; create('cCidade', 'polarArea', Object.keys(dCi), Object.values(dCi));
+    const dPe = {{{dados.perfil}}}; create('cPerfil', 'doughnut', Object.keys(dPe), Object.values(dPe));
+    const dSx = {{{dados.sexo}}}; create('cSexo', 'pie', Object.keys(dSx), Object.values(dSx));
+    const dRe = {{{dados.renda}}}; create('cRenda', 'pie', Object.keys(dRe), Object.values(dRe));
+
+    // Parte 2
+    const dPr = {{{dados.procurou_psf}}}; create('cProcPSF', 'pie', Object.keys(dPr), Object.values(dPr));
+    const dNpsf = {{{dados.nome_psf}}}; create('cNomePSF', 'bar', Object.keys(dNpsf), Object.values(dNpsf));
+    const dMpsf = {{{dados.motivo_psf}}}; create('cMotivPSF', 'bar', Object.keys(dMpsf), Object.values(dMpsf));
+
+    // Parte 4 (Escalas)
+    const dTe = {{{dados.tempo}}}; create('cTempo', 'bar', dTe.labels, dTe.data, true);
+    const dAg = {{{dados.agilidade}}}; create('cAgilidade', 'bar', dAg.labels, dAg.data, true);
+    const dLi = {{{dados.limpeza}}}; create('cLimpeza', 'bar', dLi.labels, dLi.data, true);
+    const dSi = {{{dados.sinalizacao}}}; create('cSinal', 'bar', dSi.labels, dSi.data, true);
+    const dRc = {{{dados.recepcao}}}; create('cRecepcao', 'bar', dRc.labels, dRc.data, true);
+    const dEq = {{{dados.equipe}}}; create('cEquipe', 'bar', dEq.labels, dEq.data, true);
+    const dSg = {{{dados.seguranca}}}; create('cSeguranca', 'bar', dSg.labels, dSg.data, true);
+    const dIf = {{{dados.informacoes}}}; create('cInfo', 'bar', dIf.labels, dIf.data, true);
+
+    // Parte 5 & NPS
+    const dRec = {{{dados.reclamar}}}; create('cReclamar', 'pie', Object.keys(dRec), Object.values(dRec));
+    const dPag = {{{dados.pagou}}}; create('cPagou', 'pie', Object.keys(dPag), Object.values(dPag));
+    const dPrf = {{{dados.profissional}}}; create('cNomeProf', 'pie', Object.keys(dPrf), Object.values(dPrf));
+    const dNd = {{{dados.nps_dist}}}; create('cNPSDist', 'bar', dNd.labels, dNd.data);
+
+    // Parte 6
+    const dIt = {{{dados.internado}}}; create('cInternado', 'pie', Object.keys(dIt), Object.values(dIt));
+    const dDi = {{{dados.dias}}}; create('cDias', 'bar', Object.keys(dDi), Object.values(dDi));
+    const dRo = {{{dados.roupas}}}; create('cRoupas', 'bar', dRo.labels, dRo.data, true);
+    const dAl = {{{dados.alimentacao}}}; create('cAlimenta', 'bar', dAl.labels, dAl.data, true);
+    const dVi = {{{dados.visitas}}}; create('cVisitas', 'bar', dVi.labels, dVi.data, true);
 </script>
