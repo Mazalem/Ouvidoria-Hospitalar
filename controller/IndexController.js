@@ -3,7 +3,7 @@ exports.index = async function(req, res){
 }
 
 exports.login = async function(req, res){
-    res.render('login', { title: 'Home' });
+    res.render('login', { title: 'Login' });
 }
 
 exports.registro = async function(req, res){
